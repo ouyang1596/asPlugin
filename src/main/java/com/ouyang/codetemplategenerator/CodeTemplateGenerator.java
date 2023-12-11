@@ -442,6 +442,7 @@ public class CodeTemplateGenerator extends AnAction {
 
     public static String convertToPackageName(String clickedDirectoryPath) {
 
+
         clickedDirectoryPath = clickedDirectoryPath.substring(clickedDirectoryPath.indexOf("java/") + 5);
 
         String packageName = clickedDirectoryPath.replaceAll("/", ".");
