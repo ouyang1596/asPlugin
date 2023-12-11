@@ -26,9 +26,13 @@
 
     </extensions>
     <actions>
-        <action id="plugin_ouyang_1" class="com.ouyang.codetemplategenerator.CodeTemplateGenerator"
+        <action id="plugin_ouyang_1" icon="SdkIcons.Sdk_default_icon"
+                class="com.ouyang.codetemplategenerator.CodeTemplateGenerator"
                 text="CodeTemplateGenerator" description="代码模版生成器">
             <add-to-group group-id="NewGroup" anchor="first"/>
+
         </action>
     </actions>
+
+
 </idea-plugin>
