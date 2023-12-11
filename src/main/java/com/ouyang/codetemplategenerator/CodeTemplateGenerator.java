@@ -92,8 +92,10 @@ public class CodeTemplateGenerator extends AnAction {
 
     private void setLayoutName() {
         String layoutName;
-        if (InputDialog.FileType.BINDER.equals(fileType)) {
+        if (InputDialog.FileType.CUSTOM_BINDER.equals(fileType)) {
             layoutName = "binder_" + className.replace("Binder", "").toLowerCase();
+        } else if (InputDialog.FileType.CUSTOM_DIALOG.equals(fileType)) {
+            layoutName = "dialog_" + className.replace("Dialog", "").toLowerCase();
         } else {
             layoutName = "view_" + className.replace("View", "").toLowerCase();
         }
@@ -109,8 +111,10 @@ public class CodeTemplateGenerator extends AnAction {
             // 将路径转换为包名
             String packageName = convertToPackageName(targetFolderPath);
             String code;
-            if (InputDialog.FileType.BINDER.equals(fileType)) {
+            if (InputDialog.FileType.CUSTOM_BINDER.equals(fileType)) {
                 code = generateBinderCode(data, packageName);
+            } else if (InputDialog.FileType.CUSTOM_DIALOG.equals(fileType)) {
+                code = generateDialogCode(packageName);
             } else {
                 code = generateViewCode(packageName);
             }
@@ -215,18 +219,78 @@ public class CodeTemplateGenerator extends AnAction {
         return code;
     }
 
+    @NotNull
+    private String generateDialogCode(String packageName) {
+        //布局文件名字
+        String layoutName = layoutNameHashMap.get(fileType);
+        String code;
+        if (InputDialog.FileForm.JAVA.equals(fileForm)) {
+            code = "";
+        } else {
+            code = "package " + packageName + "\n" +
+                    "\n" +
+                    "import android.content.Context\n" +
+                    "import android.os.Bundle\n" +
+                    "import android.view.View\n" +
+                    "import android.view.ViewGroup\n" +
+                    "import com.ailiao.mosheng.commonlibrary.common.DPConstants\n" +
+                    "import com.ailiao.mosheng.commonlibrary.view.dialog.BaseDialog\n" +
+                    "import com.mosheng.R\n" +
+                    "import kotlinx.android.synthetic.main." + layoutName + ".*\n" +
+                    "\n" +
+                    "class " + className + "(val dialogContext: Context) : BaseDialog(dialogContext, R.style.commonMyDialog2) {\n" +
+                    "    var onDialogClickListener: OnDialogClickListener<Any?>? = null\n" +
+                    "\n" +
+                    "    override fun onCreate(savedInstanceState: Bundle?) {\n" +
+                    "        super.onCreate(savedInstanceState)\n" +
+                    "        setContentView(\n" +
+                    "                View.inflate(dialogContext, R.layout." + layoutName + ", null),\n" +
+                    "                ViewGroup.LayoutParams(dialogWidth, ViewGroup.LayoutParams.WRAP_CONTENT)\n" +
+                    "        )\n" +
+                    "        initView()\n" +
+                    "        initData()\n" +
+                    "    }\n" +
+                    "\n" +
+                    "\n" +
+                    "    val dialogWidth: Int\n" +
+                    "        get() = screenWidth - DPConstants.DP_60\n" +
+                    "\n" +
+                    "    private fun initView() {\n" +
+                    "\n" +
+                    "    }\n" +
+                    "\n" +
+                    "    private fun initData() {\n" +
+                    "        textView.text = \"xxxx\"\n" +
+                    "    }\n" +
+                    "\n" +
+                    "\n" +
+                    "    override fun onClick(v: View) {\n" +
+                    "        super.onClick(v)\n" +
+                    "\n" +
+                    "    }\n" +
+                    "\n" +
+                    "    interface OnDialogClickListener<T> {\n" +
+                    "        fun onClick(view: View?, item: T)\n" +
+                    "    }\n" +
+                    "\n" +
+                    "\n" +
+                    "    init {\n" +
+                    "        window?.setBackgroundDrawableResource(android.R.color.transparent)\n" +
+                    "        setCanceledOnTouchOutside(false)\n" +
+                    "        setCancelable(false)\n" +
+                    "    }\n" +
+                    "}";
+        }
+        return code;
+    }
+
     /**
      * 生成对应的布局
      */
     private void generateLayout() {
         try {
             String layoutName = layoutNameHashMap.get(fileType);
-            String xmlCode;
-            if (InputDialog.FileType.BINDER.equals(fileType)) {
-                xmlCode = generateBinderLayout();
-            } else {
-                xmlCode = generateViewLayout();
-            }
+            String xmlCode = generateViewLayout();
 
             targetFolderPath = targetFolderPath.substring(0, targetFolderPath.indexOf("/java"));
             targetFolderPath += "/res/layout";
@@ -251,25 +315,6 @@ public class CodeTemplateGenerator extends AnAction {
         }
     }
 
-    @NotNull
-    private static String generateBinderLayout() {
-        String xmlCode = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-                "<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n" +
-                "    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n" +
-                "    xmlns:tools=\"http://schemas.android.com/tools\"\n" +
-                "    android:layout_width=\"match_parent\"\n" +
-                "    android:layout_height=\"wrap_content\">\n" +
-                "\n" +
-                "    <TextView\n" +
-                "        android:id=\"@+id/textView\"\n" +
-                "        android:layout_width=\"wrap_content\"\n" +
-                "        android:layout_height=\"wrap_content\"\n" +
-                "        app:layout_constraintLeft_toLeftOf=\"parent\"\n" +
-                "        app:layout_constraintTop_toTopOf=\"parent\"\n" +
-                "        tools:text=\"xxx\" />\n" +
-                "</androidx.constraintlayout.widget.ConstraintLayout>";
-        return xmlCode;
-    }
 
     @NotNull
     private static String generateViewLayout() {
@@ -298,8 +343,10 @@ public class CodeTemplateGenerator extends AnAction {
         }
 
         interface FileType {
-            String VIEW = "view";
-            String BINDER = "binder";
+            String CUSTOM_VIEW = "custom_view";
+            String CUSTOM_BINDER = "custom_binder";
+
+            String CUSTOM_DIALOG = "custom_dialog";
         }
 
         private JTextField classNameField;
@@ -338,7 +385,7 @@ public class CodeTemplateGenerator extends AnAction {
 
             JPanel fileTypePanel = new JPanel(new BorderLayout());
             JLabel fileTypeLabel = new JLabel("File Type:");
-            fileTypeComboBox = new JComboBox<>(new String[]{FileType.VIEW, FileType.BINDER});
+            fileTypeComboBox = new JComboBox<>(new String[]{FileType.CUSTOM_VIEW, FileType.CUSTOM_BINDER, FileType.CUSTOM_DIALOG});
             fileTypePanel.add(fileTypeLabel, BorderLayout.WEST);
             fileTypePanel.add(fileTypeComboBox, BorderLayout.CENTER);
 
@@ -395,7 +442,7 @@ public class CodeTemplateGenerator extends AnAction {
 
     public static String convertToPackageName(String clickedDirectoryPath) {
 
-        clickedDirectoryPath = clickedDirectoryPath.substring(clickedDirectoryPath.indexOf("com/"));
+        clickedDirectoryPath = clickedDirectoryPath.substring(clickedDirectoryPath.indexOf("java/") + 5);
 
         String packageName = clickedDirectoryPath.replaceAll("/", ".");
 
