@@ -2,6 +2,7 @@ package com.ouyang.codetemplategenerator.utils.factory;
 
 import com.intellij.openapi.ui.Messages;
 import com.ouyang.codetemplategenerator.CodeTemplateGenerator;
+import com.ouyang.codetemplategenerator.dialog.InputDialog;
 
 import java.io.IOException;
 
@@ -19,9 +20,9 @@ public class BinderTemplate extends Template {
     public void generateCode() {
 
         try {
-            String data = className.replace("Binder", "") + "Data";
+             data = className.replace("Binder", "") + "Data";
             String code;
-            if (CodeTemplateGenerator.InputDialog.FileForm.JAVA.equals(fileForm)) {
+            if (InputDialog.FileForm.JAVA.equals(fileForm)) {
                 code = "package " + packageName + ";\n" + "\n" + "import android.view.LayoutInflater;\n" + "import android.view.View;\n" + "import android.view.ViewGroup;\n" +
                         "import android.widget.TextView;\n" + "\n" + "import androidx.annotation.NonNull;\n" + "import androidx.recyclerview.widget.RecyclerView;\n" +
                         "\n" + "import com.ailiao.mosheng.commonlibrary.view.BaseItemViewBinder;\n" + "import com.mosheng.R;\n" +
@@ -53,6 +54,11 @@ public class BinderTemplate extends Template {
         } catch (IOException ex) {
             Messages.showErrorDialog(project, "Failed to generate code: " + ex.getMessage(), "Error");
         }
+
+    }
+
+    @Override
+    public void otherAction() {
 
     }
 

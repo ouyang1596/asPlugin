@@ -2,6 +2,7 @@ package com.ouyang.codetemplategenerator.utils.factory;
 
 import com.intellij.openapi.ui.Messages;
 import com.ouyang.codetemplategenerator.CodeTemplateGenerator;
+import com.ouyang.codetemplategenerator.dialog.InputDialog;
 
 import java.io.IOException;
 
@@ -21,7 +22,7 @@ public class ViewTemplate extends Template {
         try {
 
             String code;
-            if (CodeTemplateGenerator.InputDialog.FileForm.JAVA.equals(fileForm)) {
+            if (InputDialog.FileForm.JAVA.equals(fileForm)) {
                 code = "package " + packageName + ";\n" +
                         "\n" +
                         "import android.content.Context;\n" +
@@ -87,6 +88,11 @@ public class ViewTemplate extends Template {
         } catch (IOException ex) {
             Messages.showErrorDialog(project, "Failed to generate code: " + ex.getMessage(), "Error");
         }
+
+    }
+
+    @Override
+    public void otherAction() {
 
     }
 

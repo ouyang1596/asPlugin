@@ -2,6 +2,7 @@ package com.ouyang.codetemplategenerator.utils.factory;
 
 import com.intellij.openapi.ui.Messages;
 import com.ouyang.codetemplategenerator.CodeTemplateGenerator;
+import com.ouyang.codetemplategenerator.dialog.InputDialog;
 import org.apache.http.util.TextUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -22,13 +23,55 @@ public class ListActivityTemplate extends Template {
 
     @Override
     public void generateCode() {
-
         try {
+
+            Template template = CodeTemplateFactory.createTemplate(InputDialog.FileType.CUSTOM_BINDER, anActionEvent);
+            String binderClassName = className.replace("Activity", "Binder");
+            if (template != null) {
+                template.setClassName(binderClassName);
+                template.setFileForm(fileForm);
+                template.generateTemplate();
+            }
+
             String code;
-            if (CodeTemplateGenerator.InputDialog.FileForm.JAVA.equals(fileForm)) {
+            if (InputDialog.FileForm.JAVA.equals(fileForm)) {
                 code = "";
             } else {
-                code = "package " + packageName + "\n" + "\n" + "import android.os.Bundle\n" + "import androidx.recyclerview.widget.LinearLayoutManager\n" + "import com.mosheng.R\n" + "import com.mosheng.common.util.appbar.AppBar\n" + "import com.mosheng.view.BaseMoShengActivity\n" + "import kotlinx.android.synthetic.main." + layoutName + ".*\n" + "import me.drakeet.multitype.MultiTypeAdapter\n" + "\n" + "class " + className + " : BaseMoShengActivity() {\n" + "\n" + "    var multiTypeAdapter: MultiTypeAdapter? = null\n" + "    val list = mutableListOf<Any?>()\n" + "\n" + "    override fun onCreate(savedInstanceState: Bundle?) {\n" + "        super.onCreate(savedInstanceState)\n" + "        setContentView(R.layout." + layoutName + ")\n" + "        AppBar.setStatusBarFullTransparent(this)\n" + "        AppBar.setBarHeight(findViewById(R.id.statusBarTintView))\n" + "\n" + "        initRv()\n" + "\n" + "    }\n" + "\n" + "    private fun initRv() {\n" + "        multiTypeAdapter = MultiTypeAdapter(list)\n" + "        var manager = LinearLayoutManager(this)\n" + "        manager.orientation = LinearLayoutManager.VERTICAL\n" + "        recyclerView.layoutManager = manager\n" + "        recyclerView.adapter = multiTypeAdapter\n" + "    }\n" + "}";
+                code = "package " + packageName + "\n" +
+                        "\n" +
+                        "import android.os.Bundle\n" +
+                        "import androidx.recyclerview.widget.LinearLayoutManager\n" +
+                        "import com.mosheng.R\n" +
+                        "import com.mosheng.common.util.appbar.AppBar\n" +
+                        "import com.mosheng.view.BaseMoShengActivity\n" +
+                        "import kotlinx.android.synthetic.main." + layoutName + ".*\n" +
+                        "import me.drakeet.multitype.MultiTypeAdapter\n" +
+                        "\n" +
+                        "class " + className + " : BaseMoShengActivity() {\n" +
+                        "\n" +
+                        "    var multiTypeAdapter: MultiTypeAdapter? = null\n" +
+                        "    val list = mutableListOf<Any?>()\n" +
+                        "\n" +
+                        "    override fun onCreate(savedInstanceState: Bundle?) {\n" +
+                        "        super.onCreate(savedInstanceState)\n" +
+                        "        setContentView(R.layout." + layoutName + ")\n" +
+                        "        AppBar.setStatusBarFullTransparent(this)\n" +
+                        "        AppBar.setBarHeight(findViewById(R.id.statusBarTintView))\n" +
+                        "\n" +
+                        "        initRv()\n" +
+                        "    }\n" +
+                        "\n" +
+                        "    private fun initRv() {\n" +
+                        "        list.add("+binderClassName+"."+template.getData()+"())\n" +
+                        "        multiTypeAdapter = MultiTypeAdapter(list)\n" +
+                        "        multiTypeAdapter?.register("+binderClassName+"."+template.getData()+"::class.java, "+binderClassName+"())\n" +
+                        "        var manager = LinearLayoutManager(this)\n" +
+                        "        manager.orientation = LinearLayoutManager.VERTICAL\n" +
+                        "        recyclerView.layoutManager = manager\n" +
+                        "        recyclerView.adapter = multiTypeAdapter\n" +
+                        "    }\n" +
+                        "\n" +
+                        "}";
             }
 
             write(codeFilePath, code);
@@ -39,11 +82,15 @@ public class ListActivityTemplate extends Template {
     }
 
     @Override
+    public void otherAction() {
+        editAndroidManifest();
+    }
+
+    @Override
     public void generateLayout() {
         try {
             String xmlCode = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" + "<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n" + "    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n" + "    xmlns:tools=\"http://schemas.android.com/tools\"\n" + "    android:layout_width=\"match_parent\"\n" + "    android:layout_height=\"match_parent\"\n" + "    android:background=\"@color/blue\">\n" + "\n" + "    <View\n" + "        android:id=\"@+id/statusBarTintView\"\n" + "        android:layout_width=\"0dp\"\n" + "        android:layout_height=\"0dp\"\n" + "        app:layout_constraintLeft_toLeftOf=\"parent\"\n" + "        app:layout_constraintRight_toRightOf=\"parent\"\n" + "        app:layout_constraintTop_toTopOf=\"parent\" />\n" + "\n" + "    <androidx.recyclerview.widget.RecyclerView\n" + "        android:id=\"@+id/recyclerView\"\n" + "        android:layout_width=\"0dp\"\n" + "        android:layout_height=\"0dp\"\n" + "        app:layout_constraintBottom_toBottomOf=\"parent\"\n" + "        app:layout_constraintLeft_toLeftOf=\"parent\"\n" + "        app:layout_constraintRight_toRightOf=\"parent\"\n" + "        app:layout_constraintTop_toBottomOf=\"@+id/statusBarTintView\" />\n" + "</androidx.constraintlayout.widget.ConstraintLayout>";
             write(layoutFilePath, xmlCode);
-            editAndroidManifest();
         } catch (IOException ex) {
             Messages.showErrorDialog(project, "Failed to generate code: " + ex.getMessage(), "Error");
         }
