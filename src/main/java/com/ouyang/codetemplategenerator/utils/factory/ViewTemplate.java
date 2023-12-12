@@ -5,6 +5,9 @@ import com.ouyang.codetemplategenerator.CodeTemplateGenerator;
 
 import java.io.IOException;
 
+/**
+ * 自定义View
+ */
 public class ViewTemplate extends Template {
 
     @Override

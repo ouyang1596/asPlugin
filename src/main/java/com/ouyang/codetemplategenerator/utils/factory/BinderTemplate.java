@@ -5,6 +5,9 @@ import com.ouyang.codetemplategenerator.CodeTemplateGenerator;
 
 import java.io.IOException;
 
+/**
+ * 自定义Binder
+ */
 public class BinderTemplate extends Template {
 
     @Override
