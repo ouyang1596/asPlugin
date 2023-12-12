@@ -42,7 +42,6 @@ public class CodeTemplateGenerator extends AnAction {
         }
 
         String className = dialog.getClassName();
-        String data = className.replace("Binder", "") + "Data";
         String fileType = dialog.getFileType();
         String fileForm = dialog.getFileForm();
 
@@ -62,7 +61,6 @@ public class CodeTemplateGenerator extends AnAction {
         CodeTemplateFactory.getInstance().setFileType(fileType);
         CodeTemplateFactory.getInstance().setTargetFolderPath(targetFolderPath);
         CodeTemplateFactory.getInstance().setTargetFilePath(targetFilePath);
-        CodeTemplateFactory.getInstance().setData(data);
 
         Template template = CodeTemplateFactory.getInstance().createTemplate();
         template.generateTemplate();

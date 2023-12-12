@@ -35,10 +35,6 @@ public abstract class Template {
     protected String targetFolderPath;
 
     /**
-     * 数据
-     */
-    protected String data;
-    /**
      * 需要生成的文件位置路径
      */
     protected String targetFilePath;
@@ -76,9 +72,6 @@ public abstract class Template {
         this.targetFolderPath = targetFolderPath;
     }
 
-    public void setData(String data) {
-        this.data = data;
-    }
 
     public void setTargetFilePath(String targetFilePath) {
         this.targetFilePath = targetFilePath;

@@ -35,10 +35,6 @@ public class CodeTemplateFactory {
     private String targetFolderPath;
 
     /**
-     * 数据
-     */
-    private String data;
-    /**
      * 需要生成的文件位置路径
      */
     private String targetFilePath;
@@ -73,10 +69,6 @@ public class CodeTemplateFactory {
         this.targetFolderPath = targetFolderPath;
     }
 
-    public void setData(String data) {
-        this.data = data;
-    }
-
     public void setTargetFilePath(String targetFilePath) {
         this.targetFilePath = targetFilePath;
     }
@@ -101,7 +93,6 @@ public class CodeTemplateFactory {
         template.setFileType(fileType);
         template.setTargetFolderPath(targetFolderPath);
         template.setTargetFilePath(targetFilePath);
-        template.setData(data);
         return template;
     }
 }
