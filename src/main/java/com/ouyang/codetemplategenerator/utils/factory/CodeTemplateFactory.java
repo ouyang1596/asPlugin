@@ -4,8 +4,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.ouyang.codetemplategenerator.CodeTemplateGenerator;
 
-import java.util.HashMap;
-
 public class CodeTemplateFactory {
     private static final CodeTemplateFactory instance = new CodeTemplateFactory();
 
@@ -82,6 +80,9 @@ public class CodeTemplateFactory {
             case CodeTemplateGenerator.InputDialog.FileType.CUSTOM_DIALOG:
                 template = new DialogTemplate();
                 break;
+            case CodeTemplateGenerator.InputDialog.FileType.CUSTOM_LIST_ACTIVITY:
+                template = new ListActivityTemplate();
+                break;
             default:
                 template = new ViewTemplate();
                 break;
@@ -92,7 +93,7 @@ public class CodeTemplateFactory {
         template.setFileForm(fileForm);
         template.setFileType(fileType);
         template.setTargetFolderPath(targetFolderPath);
-        template.setTargetFilePath(targetFilePath);
+        template.setCodeFilePath(targetFilePath);
         return template;
     }
 }

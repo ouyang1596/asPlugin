@@ -78,7 +78,7 @@ public class DialogTemplate extends Template {
                         "}";
             }
 
-            write(targetFilePath, code);
+            write(codeFilePath, code);
         } catch (IOException ex) {
             Messages.showErrorDialog(project, "Failed to generate code: " + ex.getMessage(), "Error");
         }

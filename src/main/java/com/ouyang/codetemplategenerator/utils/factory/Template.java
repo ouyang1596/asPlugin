@@ -35,9 +35,19 @@ public abstract class Template {
     protected String targetFolderPath;
 
     /**
-     * 需要生成的文件位置路径
+     * 需要生成的代码文件位置路径
      */
-    protected String targetFilePath;
+    protected String codeFilePath;
+
+    /**
+     * 需要生成的布局文件位置路径
+     */
+    protected String layoutFilePath;
+
+    /**
+     * 需要生成的androidManifest文件位置路径
+     */
+    protected String androidManifestFilePath;
 
     /**
      * 布局文件名字
@@ -73,17 +83,19 @@ public abstract class Template {
     }
 
 
-    public void setTargetFilePath(String targetFilePath) {
-        this.targetFilePath = targetFilePath;
+    public void setCodeFilePath(String codeFilePath) {
+        this.codeFilePath = codeFilePath;
     }
 
     /**
      * 生成模板
      */
     public void generateTemplate() {
+        setLayoutName();
         // 将路径转换为包名
         packageName = convertToPackageName(targetFolderPath);
-        setLayoutName();
+        setLayoutFilePath();
+        setAndroidManifestFilePath();
         generateCode();
         generateLayout();
     }
@@ -101,8 +113,7 @@ public abstract class Template {
     public void generateLayout() {
         try {
             String xmlCode = generateViewLayout();
-            setTargetFilePath();
-            write(targetFilePath, xmlCode);
+            write(layoutFilePath, xmlCode);
         } catch (IOException ex) {
             Messages.showErrorDialog(project, "Failed to generate code: " + ex.getMessage(), "Error");
         }
@@ -152,9 +163,14 @@ public abstract class Template {
         return xmlCode;
     }
 
-    protected void setTargetFilePath() {
-        targetFolderPath = targetFolderPath.substring(0, targetFolderPath.indexOf("/java"));
-        targetFolderPath += "/res/layout";
-        targetFilePath = targetFolderPath + "/" + layoutName + ".xml";
+    protected void setLayoutFilePath() {
+        String folder = targetFolderPath.substring(0, targetFolderPath.indexOf("/java"));
+        folder += "/res/layout";
+        layoutFilePath = folder + "/" + layoutName + ".xml";
+    }
+
+    protected void setAndroidManifestFilePath() {
+        String folder = targetFolderPath.substring(0, targetFolderPath.indexOf("/java"));
+        androidManifestFilePath = folder + "/" + "AndroidManifest.xml";
     }
 }

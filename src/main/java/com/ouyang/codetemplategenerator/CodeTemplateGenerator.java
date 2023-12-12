@@ -79,6 +79,8 @@ public class CodeTemplateGenerator extends AnAction {
             String CUSTOM_BINDER = "custom_binder";
 
             String CUSTOM_DIALOG = "custom_dialog";
+
+            String CUSTOM_LIST_ACTIVITY = "custom_list_activity";
         }
 
         private JTextField classNameField;
@@ -117,7 +119,7 @@ public class CodeTemplateGenerator extends AnAction {
 
             JPanel fileTypePanel = new JPanel(new BorderLayout());
             JLabel fileTypeLabel = new JLabel("File Type:");
-            fileTypeComboBox = new JComboBox<>(new String[]{FileType.CUSTOM_VIEW, FileType.CUSTOM_BINDER, FileType.CUSTOM_DIALOG});
+            fileTypeComboBox = new JComboBox<>(new String[]{FileType.CUSTOM_VIEW, FileType.CUSTOM_BINDER, FileType.CUSTOM_DIALOG, FileType.CUSTOM_LIST_ACTIVITY});
             fileTypePanel.add(fileTypeLabel, BorderLayout.WEST);
             fileTypePanel.add(fileTypeComboBox, BorderLayout.CENTER);
 

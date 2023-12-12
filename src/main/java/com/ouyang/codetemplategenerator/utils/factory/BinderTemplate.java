@@ -20,8 +20,6 @@ public class BinderTemplate extends Template {
 
         try {
             String data = className.replace("Binder", "") + "Data";
-            // 将路径转换为包名
-            String packageName = convertToPackageName(targetFolderPath);
             String code;
             if (CodeTemplateGenerator.InputDialog.FileForm.JAVA.equals(fileForm)) {
                 code = "package " + packageName + ";\n" + "\n" + "import android.view.LayoutInflater;\n" + "import android.view.View;\n" + "import android.view.ViewGroup;\n" +
@@ -51,7 +49,7 @@ public class BinderTemplate extends Template {
                         "\n" + "    class " + data + " : Serializable {\n" + "\n" + "    }\n" + "\n" + "}";
             }
 
-            write(targetFilePath, code);
+            write(codeFilePath, code);
         } catch (IOException ex) {
             Messages.showErrorDialog(project, "Failed to generate code: " + ex.getMessage(), "Error");
         }
