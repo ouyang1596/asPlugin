@@ -1,4 +1,4 @@
-package com.ouyang.codetemplategenerator.utils.factory;
+package com.ouyang.codetemplategenerator.template.codetemplate;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.fileEditor.FileEditorManager;
@@ -6,16 +6,15 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.ouyang.codetemplategenerator.dialog.InputDialog;
+import com.ouyang.codetemplategenerator.dialog.CodeInputDialog;
+import com.ouyang.codetemplategenerator.template.Template;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public abstract class Template {
+public abstract class CodeTemplate extends Template {
 
-    protected AnActionEvent anActionEvent;
-    protected Project project;
     /**
      * 类的名字
      */
@@ -29,14 +28,6 @@ public abstract class Template {
      * 文件格式
      */
     protected String fileForm;
-    /**
-     * 点击的文件夹位置相关类
-     */
-    protected VirtualFile virtualFile;
-    /**
-     * 点击的文件夹位置路径
-     */
-    protected String targetFolderPath;
 
     /**
      * 需要生成的代码文件位置路径
@@ -67,14 +58,6 @@ public abstract class Template {
      */
     protected String data;
 
-    public void setAnActionEvent(AnActionEvent anActionEvent) {
-        this.anActionEvent = anActionEvent;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
-
     public void setClassName(String className) {
         this.className = className;
     }
@@ -87,18 +70,11 @@ public abstract class Template {
         this.fileForm = fileForm;
     }
 
-    public void setVirtualFile(VirtualFile virtualFile) {
-        this.virtualFile = virtualFile;
-    }
-
-    public void setTargetFolderPath(String targetFolderPath) {
-        this.targetFolderPath = targetFolderPath;
-    }
-
 
     /**
      * 生成模板
      */
+    @Override
     public void generateTemplate() {
         setLayoutName();
         setDefaultCodePath();
@@ -124,18 +100,11 @@ public abstract class Template {
     public abstract void setLayoutName();
 
     /**
-     * 生成代码
+     * 生成代码文件
      */
     public abstract void generateCode();
 
-    /**
-     * 其他操作
-     */
-    public abstract void otherAction();
 
-    /**
-     * 生成布局文件
-     */
     public void generateLayout() {
         try {
             String xmlCode = generateViewLayout();
@@ -145,19 +114,6 @@ public abstract class Template {
         }
     }
 
-
-    protected void write(String targetFilePath, String code) throws IOException {
-        File targetFile = new File(targetFilePath);
-        FileWriter writer = new FileWriter(targetFile);
-        writer.write(code);
-        writer.close();
-
-        // 刷新项目文件
-        VirtualFile createdFile = LocalFileSystem.getInstance().refreshAndFindFileByIoFile(targetFile);
-        if (createdFile != null) {
-            FileEditorManager.getInstance(project).openFile(virtualFile, true);
-        }
-    }
 
     /**
      * 将路径转换为包名
@@ -184,8 +140,7 @@ public abstract class Template {
      * 生成布局文件路径
      */
     protected void setLayoutFilePath() {
-        String folder = targetFolderPath.substring(0, targetFolderPath.indexOf("/java"));
-        folder += "/res/layout";
+        String folder = rootFolderPath + "/res/layout";
         layoutFilePath = folder + "/" + layoutName + ".xml";
     }
 
@@ -193,8 +148,7 @@ public abstract class Template {
      * 生成AndroidManifestFile文件路径
      */
     protected void setAndroidManifestFilePath() {
-        String folder = targetFolderPath.substring(0, targetFolderPath.indexOf("/java"));
-        androidManifestFilePath = folder + "/" + "AndroidManifest.xml";
+        androidManifestFilePath = rootFolderPath + "/" + "AndroidManifest.xml";
     }
 
     /**
@@ -202,7 +156,7 @@ public abstract class Template {
      */
     protected String getForm() {
         String form;
-        if (InputDialog.FileForm.JAVA.equals(fileForm)) {
+        if (CodeInputDialog.FileForm.JAVA.equals(fileForm)) {
             form = "java";
         } else {
             form = "kt";

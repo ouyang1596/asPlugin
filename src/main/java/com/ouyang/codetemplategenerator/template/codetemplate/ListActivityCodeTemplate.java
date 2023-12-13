@@ -1,8 +1,8 @@
-package com.ouyang.codetemplategenerator.utils.factory;
+package com.ouyang.codetemplategenerator.template.codetemplate;
 
 import com.intellij.openapi.ui.Messages;
-import com.ouyang.codetemplategenerator.CodeTemplateGenerator;
-import com.ouyang.codetemplategenerator.dialog.InputDialog;
+import com.ouyang.codetemplategenerator.dialog.CodeInputDialog;
+import com.ouyang.codetemplategenerator.template.TemplateFactory;
 import org.apache.http.util.TextUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -14,7 +14,7 @@ import java.io.*;
 /**
  * 自定义ListActivity模板
  */
-public class ListActivityTemplate extends Template {
+public class ListActivityCodeTemplate extends CodeTemplate {
 
     @Override
     public void setLayoutName() {
@@ -25,16 +25,16 @@ public class ListActivityTemplate extends Template {
     public void generateCode() {
         try {
 
-            Template template = CodeTemplateFactory.createTemplate(InputDialog.FileType.CUSTOM_BINDER, anActionEvent);
+            CodeTemplate codeTemplate = TemplateFactory.createCodeTemplate(CodeInputDialog.FileType.CUSTOM_BINDER, anActionEvent);
             String binderClassName = className.replace("Activity", "Binder");
-            if (template != null) {
-                template.setClassName(binderClassName);
-                template.setFileForm(fileForm);
-                template.generateTemplate();
+            if (codeTemplate != null) {
+                codeTemplate.setClassName(binderClassName);
+                codeTemplate.setFileForm(fileForm);
+                codeTemplate.generateTemplate();
             }
 
             String code;
-            if (InputDialog.FileForm.JAVA.equals(fileForm)) {
+            if (CodeInputDialog.FileForm.JAVA.equals(fileForm)) {
                 code = "";
             } else {
                 code = "package " + packageName + "\n" +
@@ -62,9 +62,9 @@ public class ListActivityTemplate extends Template {
                         "    }\n" +
                         "\n" +
                         "    private fun initRv() {\n" +
-                        "        list.add("+binderClassName+"."+template.getData()+"())\n" +
+                        "        list.add("+binderClassName+"."+ codeTemplate.getData()+"())\n" +
                         "        multiTypeAdapter = MultiTypeAdapter(list)\n" +
-                        "        multiTypeAdapter?.register("+binderClassName+"."+template.getData()+"::class.java, "+binderClassName+"())\n" +
+                        "        multiTypeAdapter?.register("+binderClassName+"."+ codeTemplate.getData()+"::class.java, "+binderClassName+"())\n" +
                         "        var manager = LinearLayoutManager(this)\n" +
                         "        manager.orientation = LinearLayoutManager.VERTICAL\n" +
                         "        recyclerView.layoutManager = manager\n" +

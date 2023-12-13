@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 /**
  * 用户交互弹框
  */
-public class InputDialog extends DialogWrapper {
+public class CodeInputDialog extends DialogWrapper {
     public interface FileForm {
         String JAVA = "java";
         String KOTLIN = "kotlin";
@@ -38,7 +38,7 @@ public class InputDialog extends DialogWrapper {
      */
     private JComboBox<String> fileTypeComboBox;
 
-    public InputDialog(Project project) {
+    public CodeInputDialog(Project project) {
         super(project, true);
         setTitle("Generate Code");
 

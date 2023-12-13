@@ -1,15 +1,14 @@
-package com.ouyang.codetemplategenerator.utils.factory;
+package com.ouyang.codetemplategenerator.template.codetemplate;
 
 import com.intellij.openapi.ui.Messages;
-import com.ouyang.codetemplategenerator.CodeTemplateGenerator;
-import com.ouyang.codetemplategenerator.dialog.InputDialog;
+import com.ouyang.codetemplategenerator.dialog.CodeInputDialog;
 
 import java.io.IOException;
 
 /**
  * 自定义Binder
  */
-public class BinderTemplate extends Template {
+public class BinderCodeTemplate extends CodeTemplate {
 
     @Override
     public void setLayoutName() {
@@ -22,7 +21,7 @@ public class BinderTemplate extends Template {
         try {
              data = className.replace("Binder", "") + "Data";
             String code;
-            if (InputDialog.FileForm.JAVA.equals(fileForm)) {
+            if (CodeInputDialog.FileForm.JAVA.equals(fileForm)) {
                 code = "package " + packageName + ";\n" + "\n" + "import android.view.LayoutInflater;\n" + "import android.view.View;\n" + "import android.view.ViewGroup;\n" +
                         "import android.widget.TextView;\n" + "\n" + "import androidx.annotation.NonNull;\n" + "import androidx.recyclerview.widget.RecyclerView;\n" +
                         "\n" + "import com.ailiao.mosheng.commonlibrary.view.BaseItemViewBinder;\n" + "import com.mosheng.R;\n" +

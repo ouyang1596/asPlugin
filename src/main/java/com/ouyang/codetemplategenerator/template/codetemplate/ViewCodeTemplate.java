@@ -1,15 +1,14 @@
-package com.ouyang.codetemplategenerator.utils.factory;
+package com.ouyang.codetemplategenerator.template.codetemplate;
 
 import com.intellij.openapi.ui.Messages;
-import com.ouyang.codetemplategenerator.CodeTemplateGenerator;
-import com.ouyang.codetemplategenerator.dialog.InputDialog;
+import com.ouyang.codetemplategenerator.dialog.CodeInputDialog;
 
 import java.io.IOException;
 
 /**
  * 自定义View
  */
-public class ViewTemplate extends Template {
+public class ViewCodeTemplate extends CodeTemplate {
 
     @Override
     public void setLayoutName() {
@@ -22,7 +21,7 @@ public class ViewTemplate extends Template {
         try {
 
             String code;
-            if (InputDialog.FileForm.JAVA.equals(fileForm)) {
+            if (CodeInputDialog.FileForm.JAVA.equals(fileForm)) {
                 code = "package " + packageName + ";\n" +
                         "\n" +
                         "import android.content.Context;\n" +

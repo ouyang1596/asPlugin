@@ -1,15 +1,14 @@
-package com.ouyang.codetemplategenerator.utils.factory;
+package com.ouyang.codetemplategenerator.template.codetemplate;
 
 import com.intellij.openapi.ui.Messages;
-import com.ouyang.codetemplategenerator.CodeTemplateGenerator;
-import com.ouyang.codetemplategenerator.dialog.InputDialog;
+import com.ouyang.codetemplategenerator.dialog.CodeInputDialog;
 
 import java.io.IOException;
 
 /**
  * 自定义Dialog
  */
-public class DialogTemplate extends Template {
+public class DialogCodeTemplate extends CodeTemplate {
 
     @Override
     public void setLayoutName() {
@@ -21,7 +20,7 @@ public class DialogTemplate extends Template {
 
         try {
             String code;
-            if (InputDialog.FileForm.JAVA.equals(fileForm)) {
+            if (CodeInputDialog.FileForm.JAVA.equals(fileForm)) {
                 code = "";
             } else {
                 code = "package " + packageName + "\n" +
