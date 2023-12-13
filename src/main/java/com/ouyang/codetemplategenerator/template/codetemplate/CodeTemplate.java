@@ -1,16 +1,9 @@
 package com.ouyang.codetemplategenerator.template.codetemplate;
 
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.fileEditor.FileEditorManager;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.ouyang.codetemplategenerator.dialog.CodeInputDialog;
+import com.ouyang.codetemplategenerator.template.codetemplate.dialog.CodeInputDialog;
 import com.ouyang.codetemplategenerator.template.Template;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 public abstract class CodeTemplate extends Template {

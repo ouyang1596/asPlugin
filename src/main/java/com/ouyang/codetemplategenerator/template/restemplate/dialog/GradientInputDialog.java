@@ -1,4 +1,4 @@
-package com.ouyang.codetemplategenerator.dialog;
+package com.ouyang.codetemplategenerator.template.restemplate.dialog;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
@@ -12,19 +12,14 @@ import java.awt.event.ActionListener;
 /**
  * 用户交互弹框
  */
-public class ResInputDialog extends DialogWrapper {
-    public interface Color {
-        String start = "start";
-        String end = "end";
-    }
-
+public class GradientInputDialog extends DialogWrapper {
 
     private JTextField startColoField;
     private JTextField endColorField;
     private JTextField angleField;
     private JTextField radiusField;
 
-    public ResInputDialog(Project project) {
+    public GradientInputDialog(Project project) {
         super(project, true);
         setTitle("Generate Code");
 

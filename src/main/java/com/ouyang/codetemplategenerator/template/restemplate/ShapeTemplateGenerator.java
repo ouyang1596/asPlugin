@@ -1,17 +1,16 @@
-package com.ouyang.codetemplategenerator;
+package com.ouyang.codetemplategenerator.template.restemplate;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
-import com.ouyang.codetemplategenerator.dialog.CodeInputDialog;
 import com.ouyang.codetemplategenerator.template.TemplateFactory;
-import com.ouyang.codetemplategenerator.template.codetemplate.CodeTemplate;
+import com.ouyang.codetemplategenerator.template.restemplate.dialog.ShapeInputDialog;
 
 /**
  * 代码模版生成器
  */
-public class CodeTemplateGenerator extends AnAction {
+public class ShapeTemplateGenerator extends AnAction {
 
 
     @Override
@@ -22,22 +21,23 @@ public class CodeTemplateGenerator extends AnAction {
         }
 
         // 创建并显示用户界面
-        CodeInputDialog dialog = new CodeInputDialog(project);
+        ShapeInputDialog dialog = new ShapeInputDialog(project);
         dialog.show();
         if (dialog.getExitCode() != DialogWrapper.OK_EXIT_CODE) {
             return;
         }
 
-        String className = dialog.getClassName();
-        String fileType = dialog.getFileType();
-        String fileForm = dialog.getFileForm();
+        String color = dialog.getColor();
+        String radius = dialog.getRadius();
 
-        CodeTemplate codeTemplate = TemplateFactory.createCodeTemplate(fileType, e);
+        ResTemplate codeTemplate = TemplateFactory.createResTemplate(TemplateFactory.ResType.SHAPE, e);
         if (codeTemplate != null) {
-            codeTemplate.setClassName(className);
-            codeTemplate.setFileForm(fileForm);
+            codeTemplate.setColor(color);
+            codeTemplate.setRadius(radius);
             codeTemplate.generateTemplate();
         }
+
+
     }
 
 }

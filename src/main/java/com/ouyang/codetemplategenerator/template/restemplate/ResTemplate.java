@@ -13,6 +13,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
 
 public abstract class ResTemplate extends Template {
+    private static final String translucent = "#00000000";
     /**
      * 资源文件名字
      */
@@ -22,6 +23,19 @@ public abstract class ResTemplate extends Template {
      */
     protected String resFilePath;
 
+    /**
+     * 描边颜色
+     */
+    protected String strokeColor;
+
+    /**
+     * 描边宽度
+     */
+    protected String strokeWidth;
+    /**
+     * 开始颜色
+     */
+    protected String color;
     /**
      * 开始颜色
      */
@@ -57,11 +71,32 @@ public abstract class ResTemplate extends Template {
         otherAction();
     }
 
+    public void setStrokeColor(String strokeColor) {
+        this.strokeColor = strokeColor;
+    }
+
+    public void setStrokeWidth(String strokeWidth) {
+        this.strokeWidth = strokeWidth;
+    }
+
+    public void setColor(String color) {
+        if (TextUtils.isEmpty(color)) {
+            color = translucent;
+        }
+        this.color = color;
+    }
+
     public void setStartColor(String startColor) {
+        if (TextUtils.isEmpty(startColor)) {
+            startColor = translucent;
+        }
         this.startColor = startColor;
     }
 
     public void setEndColor(String endColor) {
+        if (TextUtils.isEmpty(endColor)) {
+            endColor = translucent;
+        }
         this.endColor = endColor;
     }
 

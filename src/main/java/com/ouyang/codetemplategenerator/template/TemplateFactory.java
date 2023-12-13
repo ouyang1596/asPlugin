@@ -3,13 +3,19 @@ package com.ouyang.codetemplategenerator.template;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.ouyang.codetemplategenerator.dialog.CodeInputDialog;
 import com.ouyang.codetemplategenerator.template.codetemplate.*;
-import com.ouyang.codetemplategenerator.template.restemplate.ResTemplate;
+import com.ouyang.codetemplategenerator.template.codetemplate.dialog.CodeInputDialog;
 import com.ouyang.codetemplategenerator.template.restemplate.GradientTemplate;
+import com.ouyang.codetemplategenerator.template.restemplate.ResTemplate;
+import com.ouyang.codetemplategenerator.template.restemplate.ShapeTemplate;
+import com.ouyang.codetemplategenerator.template.restemplate.StrokeTemplate;
 
 public class TemplateFactory {
-
+    public interface ResType {
+        String GRADIENT = "GRADIENT";
+        String SHAPE = "SHAPE";
+        String STROKE = "STROKE";
+    }
 
     public static CodeTemplate createCodeTemplate(String fileType, AnActionEvent e) {
         Project project = e.getProject();
@@ -48,7 +54,7 @@ public class TemplateFactory {
     }
 
 
-    public static ResTemplate createResTemplate(AnActionEvent e) {
+    public static ResTemplate createResTemplate(String resType, AnActionEvent e) {
         Project project = e.getProject();
         if (project == null) {
             return null;
@@ -61,7 +67,18 @@ public class TemplateFactory {
 
         String targetFolderPath = virtualFile.getPath();
 
-        ResTemplate resTemplate = new GradientTemplate();
+        ResTemplate resTemplate = null;
+        switch (resType) {
+            case ResType.STROKE:
+                resTemplate = new StrokeTemplate();
+                break;
+            case ResType.SHAPE:
+                resTemplate = new ShapeTemplate();
+                break;
+            default:
+                resTemplate = new GradientTemplate();
+                break;
+        }
         resTemplate.setAnActionEvent(e);
         resTemplate.setProject(project);
         resTemplate.setVirtualFile(virtualFile);

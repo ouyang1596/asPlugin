@@ -1,7 +1,7 @@
 package com.ouyang.codetemplategenerator.template.codetemplate;
 
 import com.intellij.openapi.ui.Messages;
-import com.ouyang.codetemplategenerator.dialog.CodeInputDialog;
+import com.ouyang.codetemplategenerator.template.codetemplate.dialog.CodeInputDialog;
 
 import java.io.IOException;
 

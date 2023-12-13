@@ -1,4 +1,4 @@
-package com.ouyang.codetemplategenerator.dialog;
+package com.ouyang.codetemplategenerator.template.codetemplate.dialog;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;

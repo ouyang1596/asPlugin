@@ -29,23 +29,34 @@
 
     </extensions>
     <actions>
-        <group id="TemplateGroup" text="Template Group" description="模板生成器"
+        <group id="TemplateGroup" text="TemplateGenerator" description="模板生成器"
                icon="SdkIcons.Sdk_default_icon" popup="true">
             <add-to-group group-id="NewGroup" anchor="first"/>
             <action id="CodeTemplateGenerator" icon="SdkIcons.Sdk_default_icon"
-                    class="com.ouyang.codetemplategenerator.CodeTemplateGenerator"
+                    class="com.ouyang.codetemplategenerator.template.codetemplate.CodeTemplateGenerator"
                     text="CodeTemplateGenerator" description="代码模版生成器">
 
             </action>
         </group>
 
-
-        <action id="ResTemplateGenerator" icon="SdkIcons.Sdk_default_icon"
-                class="com.ouyang.codetemplategenerator.ResTemplateGenerator"
-                text="ResTemplateGenerator" description="资源模版生成器">
+        <group id="ResTemplateGeneratorGroup" text="ResTemplateGenerator" description="资源模版生成器"
+               icon="SdkIcons.Sdk_default_icon" popup="true">
             <add-to-group group-id="TemplateGroup" anchor="first"/>
+            <action id="GradientTemplateGenerator" icon="SdkIcons.Sdk_default_icon"
+                    class="com.ouyang.codetemplategenerator.template.restemplate.GradientTemplateGenerator"
+                    text="GradientTemplateGenerator" description="Gradient模版生成器">
+            </action>
+            <action id="ShapeTemplateGenerator" icon="SdkIcons.Sdk_default_icon"
+                    class="com.ouyang.codetemplategenerator.template.restemplate.ShapeTemplateGenerator"
+                    text="ShapeTemplateGenerator" description="Shape模版生成器">
+            </action>
+            <action id="StrokeTemplateGenerator" icon="SdkIcons.Sdk_default_icon"
+                    class="com.ouyang.codetemplategenerator.template.restemplate.StrokeTemplateGenerator"
+                    text="StrokeTemplateGenerator" description="Stroke模版生成器">
+            </action>
+        </group>
 
-        </action>
+
     </actions>
 
 
