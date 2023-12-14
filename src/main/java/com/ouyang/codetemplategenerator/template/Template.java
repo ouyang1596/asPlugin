@@ -3,6 +3,7 @@ package com.ouyang.codetemplategenerator.template;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 
@@ -58,6 +59,10 @@ public abstract class Template {
 
     protected void write(String targetFilePath, String code) throws IOException {
         File targetFile = new File(targetFilePath);
+        if (targetFile.exists()) {
+            Messages.showErrorDialog("文件已存在", "Error");
+            return;
+        }
         FileWriter writer = new FileWriter(targetFile);
         writer.write(code);
         writer.close();
