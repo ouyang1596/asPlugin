@@ -217,8 +217,6 @@ public class SelectorInputDialog extends DialogWrapper implements ActionListener
         if (e.getSource() == rbDrawable) {
             resTypePanel.setVisible(true);
         } else if (e.getSource() == rbColor) {
-            normalResField.setText("");
-            pressResField.setText("");
             resTypePanel.setVisible(false);
         } else if (e.getSource() == normalResComboBox || e.getSource() == pressResComboBox) {
             JComboBox<String> jComboBox = (JComboBox<String>) e.getSource();

@@ -77,6 +77,17 @@ public class SelectorTemplate extends ResTemplate {
     }
 
     @Override
+    protected void setResFilePath() {
+        if (resFlag == ResFlag.COLOR) {
+            String folder = rootFolderPath + "/res/color";
+            resFilePath = folder + "/" + resName + ".xml";
+        } else {
+            super.setResFilePath();
+        }
+
+    }
+
+    @Override
     public void generateResFile() {
         try {
             String state = "";
