@@ -69,10 +69,18 @@ public class SelectorTemplate extends ResTemplate {
 
     @Override
     public void setResFileName() {
+        String state = "";
+        if (SelectorState.SELECTED == selectorState) {
+            state = "se";
+        } else if (SelectorState.ENABLE == selectorState) {
+            state = "en";
+        } else {
+            state = "pr";
+        }
         if (resFlag == ResFlag.DRAWABLE) {
-            resName = "selector_nd_" + normalRes + "_pd_" + pressRes;
+            resName = "selector_no_d_" + normalRes + "_" + state + "_d_" + pressRes;
         } else if (resFlag == ResFlag.COLOR) {
-            resName = "selector_nc_" + normalRes.replace("#", "") + "_pc_" + pressRes.replace("#", "");
+            resName = "selector_no_c_" + normalRes.replace("#", "") + "_" + state + "_c_" + pressRes.replace("#", "");
         }
 
     }

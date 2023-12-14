@@ -69,10 +69,11 @@ public class GradientInputDialog extends DialogWrapper {
         otherPanel.add(anglePanel);
         otherPanel.add(radiusPanel);
 
-
+        JLabel tipsLabel = new JLabel("angle角度默认时0度，即startColo在左，endColor在右，90度即逆时针旋转90度");
         panel.add(namePanel);
         panel.add(positionPanel);
         panel.add(otherPanel);
+        panel.add(tipsLabel);
 
         return panel;
     }

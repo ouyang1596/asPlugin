@@ -99,14 +99,14 @@ public class SelectorInputDialog extends DialogWrapper implements ActionListener
         stateResPanel.add(pressResField);
 
 
-        JLabel pressedLabel = new JLabel("pressed:");
+        JLabel pressedLabel = new JLabel("pressed  ");
         rbPressed = new JBRadioButton();
         rbPressed.addActionListener(this);
         rbPressed.setSelected(true);
-        JLabel enabledLabel = new JLabel("enabled:");
+        JLabel enabledLabel = new JLabel("enabled  ");
         rbEnabled = new JBRadioButton();
         rbEnabled.addActionListener(this);
-        JLabel selectedLabel = new JLabel("selected:");
+        JLabel selectedLabel = new JLabel("selected  ");
         rbSelected = new JBRadioButton();
         rbSelected.addActionListener(this);
         ButtonGroup stateGroup = new ButtonGroup();
@@ -114,12 +114,12 @@ public class SelectorInputDialog extends DialogWrapper implements ActionListener
         stateGroup.add(rbEnabled);
         stateGroup.add(rbSelected);
         JPanel statePanel = new JPanel(new HorizontalLayout());
-        statePanel.add(pressedLabel);
         statePanel.add(rbPressed);
-        statePanel.add(enabledLabel);
+        statePanel.add(pressedLabel);
         statePanel.add(rbEnabled);
-        statePanel.add(selectedLabel);
+        statePanel.add(enabledLabel);
         statePanel.add(rbSelected);
+        statePanel.add(selectedLabel);
 
 
         resTypePanel = new JPanel(new HorizontalLayout());
@@ -135,10 +135,10 @@ public class SelectorInputDialog extends DialogWrapper implements ActionListener
         resTypePanel.add(pressResComboBox);
 
 
-        JLabel resColorLabel = new JLabel("resColor:");
+        JLabel resColorLabel = new JLabel("resColor  ");
         rbColor = new JBRadioButton();
         rbColor.addActionListener(this);
-        JLabel resDrawableLabel = new JLabel("resDrawable:");
+        JLabel resDrawableLabel = new JLabel("resDrawable  ");
         rbDrawable = new JBRadioButton();
         rbDrawable.addActionListener(this);
         rbDrawable.setSelected(true);
@@ -146,10 +146,10 @@ public class SelectorInputDialog extends DialogWrapper implements ActionListener
         buttonGroup.add(rbColor);
         buttonGroup.add(rbDrawable);
         JPanel otherPanel = new JPanel(new HorizontalLayout());
-        otherPanel.add(resColorLabel);
         otherPanel.add(rbColor);
-        otherPanel.add(resDrawableLabel);
+        otherPanel.add(resColorLabel);
         otherPanel.add(rbDrawable);
+        otherPanel.add(resDrawableLabel);
 
 
         panel.add(namePanel);
