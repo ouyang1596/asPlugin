@@ -1,8 +1,9 @@
 package com.ouyang.codetemplategenerator.template.codetemplate;
 
 import com.intellij.openapi.ui.Messages;
-import com.ouyang.codetemplategenerator.template.codetemplate.dialog.CodeInputDialog;
 import com.ouyang.codetemplategenerator.template.Template;
+import com.ouyang.codetemplategenerator.template.codetemplate.dialog.CodeInputDialog;
+import org.apache.http.util.TextUtils;
 
 import java.io.IOException;
 
@@ -99,6 +100,9 @@ public abstract class CodeTemplate extends Template {
 
 
     public void generateLayout() {
+        if (TextUtils.isEmpty(layoutName)) {
+            return;
+        }
         try {
             String xmlCode = generateViewLayout();
             write(layoutFilePath, xmlCode);

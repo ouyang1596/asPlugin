@@ -33,17 +33,27 @@
         <!--               icon="SdkIcons.Sdk_default_icon" popup="true">-->
         <!--            <add-to-group group-id="NewGroup" anchor="first"/>-->
         <!--            <action id="CodeTemplateGenerator" icon="SdkIcons.Sdk_default_icon"-->
-        <!--                    class="com.ouyang.codetemplategenerator.template.codetemplate.CodeTemplateGenerator"-->
+        <!--                    class="com.ouyang.codetemplategenerator.template.codetemplate.generator.CodeTemplateGenerator"-->
         <!--                    text="CodeTemplateGenerator" description="代码模版生成器">-->
 
         <!--            </action>-->
         <!--        </group>-->
 
-        <action id="CodeTemplateGenerator" icon="SdkIcons.Sdk_default_icon"
-                class="com.ouyang.codetemplategenerator.template.codetemplate.CodeTemplateGenerator"
-                text="CodeTemplateGenerator" description="代码模版生成器">
+
+        <group id="CodeGroupTemplateGenerator" text="CodeGroupTemplateGenerator" description="代码模版生成器"
+               icon="SdkIcons.Sdk_default_icon" popup="true">
             <add-to-group group-id="NewGroup" anchor="first"/>
-        </action>
+            <action id="CodeTemplateGenerator" icon="SdkIcons.Sdk_default_icon"
+                    class="com.ouyang.codetemplategenerator.template.codetemplate.generator.CodeTemplateGenerator"
+                    text="CodeTemplateGenerator" description="常用代码模版生成器">
+
+            </action>
+            <action id="MVPTemplateGenerator" icon="SdkIcons.Sdk_default_icon"
+                    class="com.ouyang.codetemplategenerator.template.codetemplate.generator.MVPCodeTemplateGenerator"
+                    text="MVPTemplateGenerator" description="MVP代码模版生成器">
+
+            </action>
+        </group>
 
         <group id="ResTemplateGeneratorGroup" text="ResTemplateGenerator" description="资源模版生成器"
                icon="SdkIcons.Sdk_default_icon" popup="true">

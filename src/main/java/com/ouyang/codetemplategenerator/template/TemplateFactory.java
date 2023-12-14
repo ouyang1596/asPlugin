@@ -30,6 +30,9 @@ public class TemplateFactory {
 
         CodeTemplate codeTemplate = null;
         switch (fileType) {
+            case CodeInputDialog.FileType.MVP:
+                codeTemplate = new MVPCodeTemplate();
+                break;
             case CodeInputDialog.FileType.CUSTOM_BINDER:
                 codeTemplate = new BinderCodeTemplate();
                 break;

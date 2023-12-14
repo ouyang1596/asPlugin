@@ -84,14 +84,14 @@ public class SelectorInputDialog extends DialogWrapper implements ActionListener
 
         JPanel namePanel = new JPanel(new HorizontalLayout());
         JLabel nameLabel = new JLabel("name:");
-        resNameField = new JTextField();
+        resNameField = new JTextField(20);
         namePanel.add(nameLabel);
         namePanel.add(resNameField);
 
         JLabel normalResLabel = new JLabel("normalRes:");
-        normalResField = new JTextField();
+        normalResField = new JTextField(15);
         JLabel pressResLabel = new JLabel("stateChangeRes:");
-        pressResField = new JTextField();
+        pressResField = new JTextField(15);
         JPanel stateResPanel = new JPanel(new HorizontalLayout());
         stateResPanel.add(normalResLabel);
         stateResPanel.add(normalResField);

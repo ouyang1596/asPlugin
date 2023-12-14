@@ -25,6 +25,8 @@ public class CodeInputDialog extends DialogWrapper {
         String CUSTOM_DIALOG = "custom_dialog";
 
         String CUSTOM_LIST_ACTIVITY = "custom_list_activity";
+
+        String MVP = "mvp";
     }
 
     private JTextField classNameField;

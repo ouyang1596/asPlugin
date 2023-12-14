@@ -1,14 +1,15 @@
-package com.ouyang.codetemplategenerator.template.codetemplate;
+package com.ouyang.codetemplategenerator.template.codetemplate.generator;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
-import com.ouyang.codetemplategenerator.template.codetemplate.dialog.CodeInputDialog;
 import com.ouyang.codetemplategenerator.template.TemplateFactory;
+import com.ouyang.codetemplategenerator.template.codetemplate.CodeTemplate;
+import com.ouyang.codetemplategenerator.template.codetemplate.dialog.CodeInputDialog;
 
 /**
- * 代码模版生成器
+ * 通用代码模版生成器
  */
 public class CodeTemplateGenerator extends AnAction {
 
