@@ -53,7 +53,7 @@ public class CodeInputDialog extends DialogWrapper {
 
         JPanel classNamePanel = new JPanel(new BorderLayout());
         JLabel classNameLabel = new JLabel("Class Name:");
-        classNameField = new JTextField();
+        classNameField = new JTextField(20);
         classNamePanel.add(classNameLabel, BorderLayout.WEST);
         classNamePanel.add(classNameField, BorderLayout.CENTER);
 

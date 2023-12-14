@@ -33,19 +33,19 @@ public class StrokeInputDialog extends DialogWrapper {
 
         JPanel namePanel = new JPanel(new HorizontalLayout());
         JLabel nameLabel = new JLabel("name:");
-        resNameField = new JTextField();
+        resNameField = new JTextField(20);
         namePanel.add(nameLabel);
         namePanel.add(resNameField);
 
         JPanel colorPanel = new JPanel(new HorizontalLayout());
         JLabel coloLabel = new JLabel("color:");
-        colorField = new JTextField();
+        colorField = new JTextField(10);
         colorPanel.add(coloLabel);
         colorPanel.add(colorField);
 
         JPanel strokeColorPanel = new JPanel(new HorizontalLayout());
         JLabel strokeColorLabel = new JLabel("strokeColor:");
-        strokeColorField = new JTextField();
+        strokeColorField = new JTextField(10);
         strokeColorPanel.add(strokeColorLabel);
         strokeColorPanel.add(strokeColorField);
 

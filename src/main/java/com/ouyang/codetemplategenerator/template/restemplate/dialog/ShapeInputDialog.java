@@ -29,13 +29,13 @@ public class ShapeInputDialog extends DialogWrapper {
 
         JPanel namePanel = new JPanel(new HorizontalLayout());
         JLabel nameLabel = new JLabel("name:");
-        resNameField = new JTextField();
+        resNameField = new JTextField(20);
         namePanel.add(nameLabel);
         namePanel.add(resNameField);
 
         JPanel colorPanel = new JPanel(new HorizontalLayout());
         JLabel coloLabel = new JLabel("Color:");
-        coloField = new JTextField();
+        coloField = new JTextField(10);
         colorPanel.add(coloLabel);
         colorPanel.add(coloField);
 

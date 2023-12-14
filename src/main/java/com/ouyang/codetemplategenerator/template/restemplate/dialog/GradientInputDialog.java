@@ -31,20 +31,20 @@ public class GradientInputDialog extends DialogWrapper {
 
         JPanel namePanel = new JPanel(new HorizontalLayout());
         JLabel nameLabel = new JLabel("name:");
-        resNameField = new JTextField();
+        resNameField = new JTextField(20);
         namePanel.add(nameLabel);
         namePanel.add(resNameField);
 
 
         JPanel startColorPanel = new JPanel(new HorizontalLayout());
         JLabel startColoLabel = new JLabel("startColo:");
-        startColoField = new JTextField();
+        startColoField = new JTextField(10);
         startColorPanel.add(startColoLabel);
         startColorPanel.add(startColoField);
 
         JPanel endColorPanel = new JPanel(new HorizontalLayout());
         JLabel endColorLabel = new JLabel("endColor:");
-        endColorField = new JTextField();
+        endColorField = new JTextField(10);
         endColorPanel.add(endColorLabel);
         endColorPanel.add(endColorField);
 
