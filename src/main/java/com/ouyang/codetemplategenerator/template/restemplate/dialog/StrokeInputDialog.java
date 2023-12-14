@@ -85,10 +85,10 @@ public class StrokeInputDialog extends DialogWrapper {
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (strokeWidthField.getText().isEmpty()) {
-                    Messages.showErrorDialog("Please enter a strokeWidth.", "Error");
-                } else if (strokeColorField.getText().isEmpty()) {
+                if (strokeColorField.getText().isEmpty()) {
                     Messages.showErrorDialog("Please enter a strokeColor.", "Error");
+                } else if (strokeWidthField.getText().isEmpty()) {
+                    Messages.showErrorDialog("Please enter a strokeWidth.", "Error");
                 } else {
                     close(DialogWrapper.OK_EXIT_CODE);
                 }

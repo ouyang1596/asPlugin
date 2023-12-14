@@ -172,7 +172,7 @@ public class SelectorInputDialog extends DialogWrapper implements ActionListener
                 if (normalResField.getText().isEmpty()) {
                     Messages.showErrorDialog("Please enter a normalRes.", "Error");
                 } else if (pressResField.getText().isEmpty()) {
-                    Messages.showErrorDialog("Please enter a pressRes.", "Error");
+                    Messages.showErrorDialog("Please enter a stateChangeRes.", "Error");
                 } else {
                     close(DialogWrapper.OK_EXIT_CODE);
                 }
