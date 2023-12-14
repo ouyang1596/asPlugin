@@ -1,16 +1,17 @@
-package com.ouyang.codetemplategenerator.template.restemplate;
+package com.ouyang.codetemplategenerator.template.restemplate.generator;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.ouyang.codetemplategenerator.template.TemplateFactory;
-import com.ouyang.codetemplategenerator.template.restemplate.dialog.GradientInputDialog;
+import com.ouyang.codetemplategenerator.template.restemplate.ResTemplate;
+import com.ouyang.codetemplategenerator.template.restemplate.dialog.ShapeInputDialog;
 
 /**
- * Gradient模板生成器
+ * Shape模板生成器
  */
-public class GradientTemplateGenerator extends AnAction {
+public class ShapeTemplateGenerator extends AnAction {
 
 
     @Override
@@ -22,27 +23,23 @@ public class GradientTemplateGenerator extends AnAction {
 
         handleDialog(e, project);
 
-
     }
 
     public static ResTemplate handleDialog(AnActionEvent e, Project project) {
         // 创建并显示用户界面
-        GradientInputDialog dialog = new GradientInputDialog(project);
+        ShapeInputDialog dialog = new ShapeInputDialog(project);
         dialog.show();
         if (dialog.getExitCode() != DialogWrapper.OK_EXIT_CODE) {
             return null;
         }
-
-        String startColor = dialog.getStartColor();
-        String endColor = dialog.getEndColor();
-        String angle = dialog.getAngle();
+        String resName = dialog.getResName();
+        String color = dialog.getColor();
         String radius = dialog.getRadius();
 
-        ResTemplate codeTemplate = TemplateFactory.createResTemplate(TemplateFactory.ResType.GRADIENT, e);
+        ResTemplate codeTemplate = TemplateFactory.createResTemplate(TemplateFactory.ResType.SHAPE, e);
         if (codeTemplate != null) {
-            codeTemplate.setStartColor(startColor);
-            codeTemplate.setEndColor(endColor);
-            codeTemplate.setAngle(angle);
+            codeTemplate.setResName(resName);
+            codeTemplate.setColor(color);
             codeTemplate.setRadius(radius);
             codeTemplate.generateTemplate();
         }

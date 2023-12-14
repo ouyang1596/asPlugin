@@ -3,15 +3,16 @@ package com.ouyang.codetemplategenerator.template.restemplate.dialog;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.ui.VerticalFlowLayout;
+import org.jdesktop.swingx.HorizontalLayout;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
 public class ShapeInputDialog extends DialogWrapper {
-
+    private JTextField resNameField;
     private JTextField coloField;
     private JTextField radiusField;
 
@@ -24,23 +25,30 @@ public class ShapeInputDialog extends DialogWrapper {
 
     @Override
     protected JComponent createCenterPanel() {
-        JPanel panel = new JPanel(new BorderLayout());
+        JPanel panel = new JPanel(new VerticalFlowLayout());
 
-        JPanel colorPanel = new JPanel(new BorderLayout());
+        JPanel namePanel = new JPanel(new HorizontalLayout());
+        JLabel nameLabel = new JLabel("name:");
+        resNameField = new JTextField();
+        namePanel.add(nameLabel);
+        namePanel.add(resNameField);
+
+        JPanel colorPanel = new JPanel(new HorizontalLayout());
         JLabel coloLabel = new JLabel("Color:");
         coloField = new JTextField();
-        colorPanel.add(coloLabel, BorderLayout.WEST);
-        colorPanel.add(coloField, BorderLayout.CENTER);
+        colorPanel.add(coloLabel);
+        colorPanel.add(coloField);
 
 
-        JPanel radiusPanel = new JPanel(new BorderLayout());
+        JPanel radiusPanel = new JPanel(new HorizontalLayout());
         JLabel radiusLabel = new JLabel("Radius:");
         radiusField = new JTextField();
-        radiusPanel.add(radiusLabel, BorderLayout.WEST);
-        radiusPanel.add(radiusField, BorderLayout.CENTER);
+        radiusPanel.add(radiusLabel);
+        radiusPanel.add(radiusField);
 
-        panel.add(colorPanel, BorderLayout.NORTH);
-        panel.add(radiusPanel, BorderLayout.SOUTH);
+        panel.add(namePanel);
+        panel.add(colorPanel);
+        panel.add(radiusPanel);
 
         return panel;
     }
@@ -73,6 +81,10 @@ public class ShapeInputDialog extends DialogWrapper {
         panel.add(cancelButton);
 
         return panel;
+    }
+
+    public String getResName() {
+        return resNameField.getText().trim();
     }
 
     public String getColor() {

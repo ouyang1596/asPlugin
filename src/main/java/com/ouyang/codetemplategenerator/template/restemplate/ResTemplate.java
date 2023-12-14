@@ -13,7 +13,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
 
 public abstract class ResTemplate extends Template {
-    private static final String translucent = "#00000000";
+    public static final String translucent = "#00000000";
     /**
      * 资源文件名字
      */
@@ -65,10 +65,16 @@ public abstract class ResTemplate extends Template {
 
     @Override
     public void generateTemplate() {
-        setResFileName();
+        if (TextUtils.isEmpty(resName)) {
+            setResFileName();
+        }
         setResFilePath();
         generateResFile();
         otherAction();
+    }
+
+    public void setResName(String resName) {
+        this.resName = resName;
     }
 
     public String getResName() {

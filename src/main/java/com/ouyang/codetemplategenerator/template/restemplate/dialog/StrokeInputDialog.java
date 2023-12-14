@@ -3,9 +3,10 @@ package com.ouyang.codetemplategenerator.template.restemplate.dialog;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.ui.VerticalFlowLayout;
+import org.jdesktop.swingx.HorizontalLayout;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,7 +14,7 @@ import java.awt.event.ActionListener;
  * 用户交互弹框
  */
 public class StrokeInputDialog extends DialogWrapper {
-
+    private JTextField resNameField;
     private JTextField colorField;
     private JTextField strokeColorField;
     private JTextField strokeWidthField;
@@ -28,43 +29,50 @@ public class StrokeInputDialog extends DialogWrapper {
 
     @Override
     protected JComponent createCenterPanel() {
-        JPanel panel = new JPanel(new BorderLayout());
+        JPanel panel = new JPanel(new VerticalFlowLayout());
 
-        JPanel colorPanel = new JPanel(new BorderLayout());
+        JPanel namePanel = new JPanel(new HorizontalLayout());
+        JLabel nameLabel = new JLabel("name:");
+        resNameField = new JTextField();
+        namePanel.add(nameLabel);
+        namePanel.add(resNameField);
+
+        JPanel colorPanel = new JPanel(new HorizontalLayout());
         JLabel coloLabel = new JLabel("color:");
         colorField = new JTextField();
-        colorPanel.add(coloLabel, BorderLayout.WEST);
-        colorPanel.add(colorField, BorderLayout.CENTER);
+        colorPanel.add(coloLabel);
+        colorPanel.add(colorField);
 
-        JPanel strokeColorPanel = new JPanel(new BorderLayout());
+        JPanel strokeColorPanel = new JPanel(new HorizontalLayout());
         JLabel strokeColorLabel = new JLabel("strokeColor:");
         strokeColorField = new JTextField();
-        strokeColorPanel.add(strokeColorLabel, BorderLayout.WEST);
-        strokeColorPanel.add(strokeColorField, BorderLayout.CENTER);
+        strokeColorPanel.add(strokeColorLabel);
+        strokeColorPanel.add(strokeColorField);
 
-        JPanel colorGroupPanel = new JPanel(new BorderLayout());
-        colorGroupPanel.add(strokeColorPanel, BorderLayout.WEST);
-        colorGroupPanel.add(colorPanel, BorderLayout.EAST);
+        JPanel colorGroupPanel = new JPanel(new HorizontalLayout());
+        colorGroupPanel.add(strokeColorPanel);
+        colorGroupPanel.add(colorPanel);
 
-        JPanel strokeWidthPanel = new JPanel(new BorderLayout());
+        JPanel strokeWidthPanel = new JPanel(new HorizontalLayout());
         JLabel strokeWidthLabel = new JLabel("strokeWidth:");
         strokeWidthField = new JTextField();
-        strokeWidthPanel.add(strokeWidthLabel, BorderLayout.WEST);
-        strokeWidthPanel.add(strokeWidthField, BorderLayout.CENTER);
+        strokeWidthPanel.add(strokeWidthLabel);
+        strokeWidthPanel.add(strokeWidthField);
 
 
-        JPanel radiusPanel = new JPanel(new BorderLayout());
+        JPanel radiusPanel = new JPanel(new HorizontalLayout());
         JLabel radiusLabel = new JLabel("radius:");
         radiusField = new JTextField();
-        radiusPanel.add(radiusLabel, BorderLayout.WEST);
-        radiusPanel.add(radiusField, BorderLayout.CENTER);
+        radiusPanel.add(radiusLabel);
+        radiusPanel.add(radiusField);
 
-        JPanel otherPanel = new JPanel(new BorderLayout());
-        otherPanel.add(strokeWidthPanel, BorderLayout.WEST);
-        otherPanel.add(radiusPanel, BorderLayout.EAST);
+        JPanel otherPanel = new JPanel(new HorizontalLayout());
+        otherPanel.add(strokeWidthPanel);
+        otherPanel.add(radiusPanel);
 
-        panel.add(colorGroupPanel, BorderLayout.NORTH);
-        panel.add(otherPanel, BorderLayout.SOUTH);
+        panel.add(namePanel);
+        panel.add(colorGroupPanel);
+        panel.add(otherPanel);
 
         return panel;
     }
@@ -99,6 +107,10 @@ public class StrokeInputDialog extends DialogWrapper {
         panel.add(cancelButton);
 
         return panel;
+    }
+
+    public String getResName() {
+        return resNameField.getText().trim();
     }
 
     public String getColor() {

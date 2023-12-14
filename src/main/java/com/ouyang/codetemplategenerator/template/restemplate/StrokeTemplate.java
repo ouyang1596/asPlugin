@@ -12,7 +12,12 @@ public class StrokeTemplate extends ResTemplate {
 
     @Override
     public void setResFileName() {
-        resName = "stroke_sc_" + strokeColor.replace("#", "") + "_sw_" + strokeWidth + "_c_" + color.replace("#", "") + "_r_" + radius;
+        String cStr = "";
+        if (!ResTemplate.translucent.equals(color)) {
+            cStr = "_c_" + color.replace("#", "");
+        }
+
+        resName = "stroke_sc_" + strokeColor.replace("#", "") + "_sw_" + strokeWidth + cStr + "_r_" + radius;
     }
 
     @Override

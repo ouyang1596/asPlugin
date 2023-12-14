@@ -3,15 +3,16 @@ package com.ouyang.codetemplategenerator.template.restemplate.dialog;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.ui.VerticalFlowLayout;
+import org.jdesktop.swingx.HorizontalLayout;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
 public class GradientInputDialog extends DialogWrapper {
-
+    private JTextField resNameField;
     private JTextField startColoField;
     private JTextField endColorField;
     private JTextField angleField;
@@ -26,44 +27,52 @@ public class GradientInputDialog extends DialogWrapper {
 
     @Override
     protected JComponent createCenterPanel() {
-        JPanel panel = new JPanel(new BorderLayout());
+        JPanel panel = new JPanel(new VerticalFlowLayout());
 
-        JPanel startColorPanel = new JPanel(new BorderLayout());
+        JPanel namePanel = new JPanel(new HorizontalLayout());
+        JLabel nameLabel = new JLabel("name:");
+        resNameField = new JTextField();
+        namePanel.add(nameLabel);
+        namePanel.add(resNameField);
+
+
+        JPanel startColorPanel = new JPanel(new HorizontalLayout());
         JLabel startColoLabel = new JLabel("startColo:");
         startColoField = new JTextField();
-        startColorPanel.add(startColoLabel, BorderLayout.WEST);
-        startColorPanel.add(startColoField, BorderLayout.CENTER);
+        startColorPanel.add(startColoLabel);
+        startColorPanel.add(startColoField);
 
-        JPanel endColorPanel = new JPanel(new BorderLayout());
+        JPanel endColorPanel = new JPanel(new HorizontalLayout());
         JLabel endColorLabel = new JLabel("endColor:");
         endColorField = new JTextField();
-        endColorPanel.add(endColorLabel, BorderLayout.WEST);
-        endColorPanel.add(endColorField, BorderLayout.CENTER);
+        endColorPanel.add(endColorLabel);
+        endColorPanel.add(endColorField);
 
-        JPanel positionPanel = new JPanel(new BorderLayout());
-        positionPanel.add(startColorPanel, BorderLayout.WEST);
-        positionPanel.add(endColorPanel, BorderLayout.EAST);
+        JPanel positionPanel = new JPanel(new HorizontalLayout());
+        positionPanel.add(startColorPanel);
+        positionPanel.add(endColorPanel);
 
-        JPanel anglePanel = new JPanel(new BorderLayout());
+        JPanel anglePanel = new JPanel(new HorizontalLayout());
         JLabel angleLabel = new JLabel("angle:");
         angleField = new JTextField();
-        anglePanel.add(angleLabel, BorderLayout.WEST);
-        anglePanel.add(angleField, BorderLayout.CENTER);
+        anglePanel.add(angleLabel);
+        anglePanel.add(angleField);
 
 
-        JPanel radiusPanel = new JPanel(new BorderLayout());
+        JPanel radiusPanel = new JPanel(new HorizontalLayout());
         JLabel radiusLabel = new JLabel("radius:");
         radiusField = new JTextField();
-        radiusPanel.add(radiusLabel, BorderLayout.WEST);
-        radiusPanel.add(radiusField, BorderLayout.CENTER);
+        radiusPanel.add(radiusLabel);
+        radiusPanel.add(radiusField);
 
-        JPanel otherPanel = new JPanel(new BorderLayout());
-        otherPanel.add(anglePanel, BorderLayout.WEST);
-        otherPanel.add(radiusPanel, BorderLayout.EAST);
+        JPanel otherPanel = new JPanel(new HorizontalLayout());
+        otherPanel.add(anglePanel);
+        otherPanel.add(radiusPanel);
 
 
-        panel.add(positionPanel, BorderLayout.NORTH);
-        panel.add(otherPanel, BorderLayout.SOUTH);
+        panel.add(namePanel);
+        panel.add(positionPanel);
+        panel.add(otherPanel);
 
         return panel;
     }
@@ -98,6 +107,10 @@ public class GradientInputDialog extends DialogWrapper {
         panel.add(cancelButton);
 
         return panel;
+    }
+
+    public String getResName() {
+        return resNameField.getText().trim();
     }
 
     public String getStartColor() {

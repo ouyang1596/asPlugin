@@ -7,10 +7,15 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.VerticalFlowLayout;
 import com.intellij.ui.components.JBRadioButton;
 import com.ouyang.codetemplategenerator.template.TemplateFactory;
-import com.ouyang.codetemplategenerator.template.restemplate.*;
+import com.ouyang.codetemplategenerator.template.restemplate.ResTemplate;
+import com.ouyang.codetemplategenerator.template.restemplate.SelectorTemplate;
+import com.ouyang.codetemplategenerator.template.restemplate.generator.GradientTemplateGenerator;
+import com.ouyang.codetemplategenerator.template.restemplate.generator.ShapeTemplateGenerator;
+import com.ouyang.codetemplategenerator.template.restemplate.generator.StrokeTemplateGenerator;
 import org.jdesktop.swingx.HorizontalLayout;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,7 +23,7 @@ import java.awt.event.ActionListener;
  * 用户交互弹框
  */
 public class SelectorInputDialog extends DialogWrapper implements ActionListener {
-
+    private JTextField resNameField;
     private JTextField normalResField;
     private JTextField pressResField;
     private JBRadioButton radioButtonColor;
@@ -58,6 +63,12 @@ public class SelectorInputDialog extends DialogWrapper implements ActionListener
     @Override
     protected JComponent createCenterPanel() {
         JPanel panel = new JPanel(new VerticalFlowLayout());
+
+        JPanel namePanel = new JPanel(new BorderLayout());
+        JLabel nameLabel = new JLabel("name:");
+        resNameField = new JTextField();
+        namePanel.add(nameLabel);
+        namePanel.add(resNameField);
 
         JPanel normalResPanel = new JPanel(new HorizontalLayout());
         JLabel normalResLabel = new JLabel("normalRes:");
@@ -150,6 +161,10 @@ public class SelectorInputDialog extends DialogWrapper implements ActionListener
         panel.add(cancelButton);
 
         return panel;
+    }
+
+    public String getResName() {
+        return resNameField.getText().trim();
     }
 
     public String getNormalRes() {

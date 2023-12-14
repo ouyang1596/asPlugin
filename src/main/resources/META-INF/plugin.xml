@@ -43,19 +43,19 @@
                icon="SdkIcons.Sdk_default_icon" popup="true">
             <add-to-group group-id="TemplateGroup" anchor="first"/>
             <action id="GradientTemplateGenerator" icon="SdkIcons.Sdk_default_icon"
-                    class="com.ouyang.codetemplategenerator.template.restemplate.GradientTemplateGenerator"
+                    class="com.ouyang.codetemplategenerator.template.restemplate.generator.GradientTemplateGenerator"
                     text="GradientTemplateGenerator" description="Gradient模版生成器">
             </action>
             <action id="ShapeTemplateGenerator" icon="SdkIcons.Sdk_default_icon"
-                    class="com.ouyang.codetemplategenerator.template.restemplate.ShapeTemplateGenerator"
+                    class="com.ouyang.codetemplategenerator.template.restemplate.generator.ShapeTemplateGenerator"
                     text="ShapeTemplateGenerator" description="Shape模版生成器">
             </action>
             <action id="StrokeTemplateGenerator" icon="SdkIcons.Sdk_default_icon"
-                    class="com.ouyang.codetemplategenerator.template.restemplate.StrokeTemplateGenerator"
+                    class="com.ouyang.codetemplategenerator.template.restemplate.generator.StrokeTemplateGenerator"
                     text="StrokeTemplateGenerator" description="Stroke模版生成器">
             </action>
             <action id="SelectorTemplateGenerator" icon="SdkIcons.Sdk_default_icon"
-                    class="com.ouyang.codetemplategenerator.template.restemplate.SelectorTemplateGenerator"
+                    class="com.ouyang.codetemplategenerator.template.restemplate.generator.SelectorTemplateGenerator"
                     text="SelectorTemplateGenerator" description="Selector模版生成器">
             </action>
         </group>
