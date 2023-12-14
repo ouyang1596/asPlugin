@@ -34,6 +34,7 @@ public class SelectorTemplateGenerator extends AnAction {
         String pressRes = dialog.getPressRes();
         String normalRes = dialog.getNormalRes();
         int resFlag = dialog.getResFlag();
+        int selectorState = dialog.getSelectorState();
 
         ResTemplate codeTemplate = TemplateFactory.createResTemplate(TemplateFactory.ResType.SELECTOR, e);
         if (codeTemplate instanceof SelectorTemplate) {
@@ -42,6 +43,7 @@ public class SelectorTemplateGenerator extends AnAction {
             template.setPressRes(pressRes);
             template.setNormalRes(normalRes);
             template.setResFlag(resFlag);
+            template.setSelectorState(selectorState);
             template.generateTemplate();
         }
 

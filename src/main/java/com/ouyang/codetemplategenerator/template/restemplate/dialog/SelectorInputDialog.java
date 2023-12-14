@@ -15,7 +15,6 @@ import com.ouyang.codetemplategenerator.template.restemplate.generator.StrokeTem
 import org.jdesktop.swingx.HorizontalLayout;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -26,8 +25,23 @@ public class SelectorInputDialog extends DialogWrapper implements ActionListener
     private JTextField resNameField;
     private JTextField normalResField;
     private JTextField pressResField;
-    private JBRadioButton radioButtonColor;
-    private JBRadioButton radioButtonDrawable;
+
+    /**
+     * state_selected
+     */
+    private JBRadioButton rbSelected;
+    /**
+     * state_pressed
+     */
+    private JBRadioButton rbPressed;
+    /**
+     * 色值类型
+     */
+    private JBRadioButton rbColor;
+    /**
+     * 资源类型
+     */
+    private JBRadioButton rbDrawable;
 
     private Project project;
 
@@ -64,67 +78,73 @@ public class SelectorInputDialog extends DialogWrapper implements ActionListener
     protected JComponent createCenterPanel() {
         JPanel panel = new JPanel(new VerticalFlowLayout());
 
-        JPanel namePanel = new JPanel(new BorderLayout());
+        JPanel namePanel = new JPanel(new HorizontalLayout());
         JLabel nameLabel = new JLabel("name:");
         resNameField = new JTextField();
         namePanel.add(nameLabel);
         namePanel.add(resNameField);
 
-        JPanel normalResPanel = new JPanel(new HorizontalLayout());
         JLabel normalResLabel = new JLabel("normalRes:");
         normalResField = new JTextField();
-        normalResPanel.add(normalResLabel);
-        normalResPanel.add(normalResField);
-
-        JPanel pressResPanel = new JPanel(new HorizontalLayout());
         JLabel pressResLabel = new JLabel("pressRes:");
         pressResField = new JTextField();
-        pressResPanel.add(pressResLabel);
-        pressResPanel.add(pressResField);
+        JPanel stateResPanel = new JPanel(new HorizontalLayout());
+        stateResPanel.add(normalResLabel);
+        stateResPanel.add(normalResField);
+        stateResPanel.add(pressResLabel);
+        stateResPanel.add(pressResField);
 
-        JPanel stateGroupPanel = new JPanel(new HorizontalLayout());
-        stateGroupPanel.add(pressResPanel);
-        stateGroupPanel.add(normalResPanel);
 
-
-        JPanel resColorPanel = new JPanel(new HorizontalLayout());
-        JLabel resColorLabel = new JLabel("resColor:");
-        radioButtonColor = new JBRadioButton();
-        radioButtonColor.addActionListener(this);
-        resColorPanel.add(resColorLabel);
-        resColorPanel.add(radioButtonColor);
-
-        JPanel resDrawablePanel = new JPanel(new HorizontalLayout());
-        JLabel resDrawableLabel = new JLabel("resDrawable:");
-        radioButtonDrawable = new JBRadioButton();
-        radioButtonDrawable.addActionListener(this);
-        radioButtonDrawable.setSelected(true);
-        resDrawablePanel.add(resDrawableLabel);
-        resDrawablePanel.add(radioButtonDrawable);
-
-        ButtonGroup buttonGroup = new ButtonGroup();
-        buttonGroup.add(radioButtonColor);
-        buttonGroup.add(radioButtonDrawable);
-
-        JPanel otherPanel = new JPanel(new HorizontalLayout());
-        otherPanel.add(resColorPanel);
-        otherPanel.add(resDrawablePanel);
+        JLabel pressedLabel = new JLabel("pressed:");
+        rbPressed = new JBRadioButton();
+        rbPressed.addActionListener(this);
+        rbPressed.setSelected(true);
+        JLabel selectedLabel = new JLabel("selected:");
+        rbSelected = new JBRadioButton();
+        rbSelected.addActionListener(this);
+        ButtonGroup stateGroup = new ButtonGroup();
+        stateGroup.add(rbPressed);
+        stateGroup.add(rbSelected);
+        JPanel statePanel = new JPanel(new HorizontalLayout());
+        statePanel.add(pressedLabel);
+        statePanel.add(rbPressed);
+        statePanel.add(selectedLabel);
+        statePanel.add(rbSelected);
 
 
         resTypePanel = new JPanel(new HorizontalLayout());
         JLabel pressResCLabel = new JLabel("press:");
         pressResComboBox = new JComboBox<>(new String[]{TemplateFactory.ResType.SHAPE, TemplateFactory.ResType.STROKE, TemplateFactory.ResType.GRADIENT});
         pressResComboBox.addActionListener(this);
-        resTypePanel.add(pressResCLabel);
-        resTypePanel.add(pressResComboBox);
-
         JLabel normalCLabel = new JLabel("normal:");
         normalResComboBox = new JComboBox<>(new String[]{TemplateFactory.ResType.SHAPE, TemplateFactory.ResType.STROKE, TemplateFactory.ResType.GRADIENT});
         normalResComboBox.addActionListener(this);
+        resTypePanel.add(pressResCLabel);
+        resTypePanel.add(pressResComboBox);
         resTypePanel.add(normalCLabel);
         resTypePanel.add(normalResComboBox);
 
-        panel.add(stateGroupPanel);
+
+        JLabel resColorLabel = new JLabel("resColor:");
+        rbColor = new JBRadioButton();
+        rbColor.addActionListener(this);
+        JLabel resDrawableLabel = new JLabel("resDrawable:");
+        rbDrawable = new JBRadioButton();
+        rbDrawable.addActionListener(this);
+        rbDrawable.setSelected(true);
+        ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup.add(rbColor);
+        buttonGroup.add(rbDrawable);
+        JPanel otherPanel = new JPanel(new HorizontalLayout());
+        otherPanel.add(resColorLabel);
+        otherPanel.add(rbColor);
+        otherPanel.add(resDrawableLabel);
+        otherPanel.add(rbDrawable);
+
+
+        panel.add(namePanel);
+        panel.add(stateResPanel);
+        panel.add(statePanel);
         panel.add(resTypePanel);
         panel.add(otherPanel);
 
@@ -176,19 +196,27 @@ public class SelectorInputDialog extends DialogWrapper implements ActionListener
     }
 
     public int getResFlag() {
-        if (radioButtonColor.isSelected()) {
+        if (rbColor.isSelected()) {
             return SelectorTemplate.ResFlag.COLOR;
         } else {
             return SelectorTemplate.ResFlag.DRAWABLE;
         }
     }
 
+    public int getSelectorState() {
+        if (rbPressed.isSelected()) {
+            return SelectorTemplate.SelectorState.PRESSED;
+        } else {
+            return SelectorTemplate.SelectorState.SELECTED;
+        }
+    }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == radioButtonDrawable) {
+        if (e.getSource() == rbDrawable) {
             resTypePanel.setVisible(true);
-        } else if (e.getSource() == radioButtonColor) {
+        } else if (e.getSource() == rbColor) {
             normalResField.setText("");
             pressResField.setText("");
             resTypePanel.setVisible(false);

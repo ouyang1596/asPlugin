@@ -15,6 +15,14 @@ public class SelectorTemplate extends ResTemplate {
     }
 
     /**
+     * selector状态
+     */
+    public interface SelectorState {
+        int PRESSED = 1;
+        int SELECTED = 2;
+    }
+
+    /**
      * 按下资源
      */
     protected String pressRes;
@@ -27,6 +35,19 @@ public class SelectorTemplate extends ResTemplate {
      * 资源标识
      */
     private int resFlag = ResFlag.DRAWABLE;
+
+    /**
+     * 状态
+     */
+    private int selectorState = SelectorState.PRESSED;
+
+    public int getSelectorState() {
+        return selectorState;
+    }
+
+    public void setSelectorState(int selectorState) {
+        this.selectorState = selectorState;
+    }
 
     public void setPressRes(String pressRes) {
         this.pressRes = pressRes;
@@ -58,10 +79,16 @@ public class SelectorTemplate extends ResTemplate {
     @Override
     public void generateResFile() {
         try {
+            String state = "";
+            if (SelectorState.SELECTED == selectorState) {
+                state = "state_selected";
+            } else {
+                state = "state_pressed";
+            }
             String xmlCode = null;
             if (resFlag == ResFlag.DRAWABLE) {
                 xmlCode = "<selector xmlns:android=\"http://schemas.android.com/apk/res/android\">\n" +
-                        "<item android:state_pressed=\"true\" android:drawable=\"@drawable/" + pressRes + "\" />\n" +
+                        "<item android:" + state + "=\"true\" android:drawable=\"@drawable/" + pressRes + "\" />\n" +
                         "<item android:state_focused=\"true\" android:drawable=\"@drawable/" + pressRes + "\" />\n" +
                         "<item android:drawable=\"@drawable/" + normalRes + "\" />\n" +
                         "</selector>";
@@ -70,7 +97,7 @@ public class SelectorTemplate extends ResTemplate {
                 String pressResName = handleColorName(pressRes, getColorFilePath());
                 xmlCode = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                         "<selector xmlns:android=\"http://schemas.android.com/apk/res/android\">\n" +
-                        "    <item android:color=\"" + pressResName + "\" android:state_pressed=\"true\" />\n" +
+                        "    <item android:color=\"" + pressResName + "\" android:" + state + "=\"true\" />\n" +
                         "    <item android:color=\"" + pressResName + "\" android:state_focused=\"true\" />\n" +
                         "    <item android:color=\"" + normalResName + "\" />\n" +
                         "</selector>";
