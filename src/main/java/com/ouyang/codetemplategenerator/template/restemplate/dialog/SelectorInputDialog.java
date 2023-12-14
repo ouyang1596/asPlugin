@@ -123,16 +123,16 @@ public class SelectorInputDialog extends DialogWrapper implements ActionListener
 
 
         resTypePanel = new JPanel(new HorizontalLayout());
-        JLabel pressResCLabel = new JLabel("press:");
-        pressResComboBox = new JComboBox<>(new String[]{TemplateFactory.ResType.SHAPE, TemplateFactory.ResType.STROKE, TemplateFactory.ResType.GRADIENT});
-        pressResComboBox.addActionListener(this);
         JLabel normalCLabel = new JLabel("normal:");
         normalResComboBox = new JComboBox<>(new String[]{TemplateFactory.ResType.SHAPE, TemplateFactory.ResType.STROKE, TemplateFactory.ResType.GRADIENT});
         normalResComboBox.addActionListener(this);
-        resTypePanel.add(pressResCLabel);
-        resTypePanel.add(pressResComboBox);
+        JLabel pressResCLabel = new JLabel("stateChange:");
+        pressResComboBox = new JComboBox<>(new String[]{TemplateFactory.ResType.SHAPE, TemplateFactory.ResType.STROKE, TemplateFactory.ResType.GRADIENT});
+        pressResComboBox.addActionListener(this);
         resTypePanel.add(normalCLabel);
         resTypePanel.add(normalResComboBox);
+        resTypePanel.add(pressResCLabel);
+        resTypePanel.add(pressResComboBox);
 
 
         JLabel resColorLabel = new JLabel("resColor:");

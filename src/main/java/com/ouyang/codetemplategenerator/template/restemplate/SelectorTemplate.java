@@ -108,8 +108,8 @@ public class SelectorTemplate extends ResTemplate {
 //                        "<item android:drawable=\"@drawable/" + normalRes + "\" " + enable + "/>\n" +
 //                        "</selector>";
                 xmlCode = "<selector xmlns:android=\"http://schemas.android.com/apk/res/android\">\n" +
-                        "    <item android:drawable=\"" + pressRes + "\" android:" + state + "=\"true\" />\n" +
-                        "    <item android:drawable=\"" + normalRes + "\" " + enable + "/>\n" +
+                        "    <item android:drawable=\"@drawable/" + pressRes + "\" android:" + state + "=\"true\" />\n" +
+                        "    <item android:drawable=\"@drawable/" + normalRes + "\" " + enable + "/>\n" +
                         "</selector>";
             } else if (resFlag == ResFlag.COLOR) {
                 String normalResName = handleColorName(normalRes, getColorFilePath());
