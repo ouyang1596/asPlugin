@@ -5,16 +5,14 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.ouyang.codetemplategenerator.template.codetemplate.*;
 import com.ouyang.codetemplategenerator.template.codetemplate.dialog.CodeInputDialog;
-import com.ouyang.codetemplategenerator.template.restemplate.GradientTemplate;
-import com.ouyang.codetemplategenerator.template.restemplate.ResTemplate;
-import com.ouyang.codetemplategenerator.template.restemplate.ShapeTemplate;
-import com.ouyang.codetemplategenerator.template.restemplate.StrokeTemplate;
+import com.ouyang.codetemplategenerator.template.restemplate.*;
 
 public class TemplateFactory {
     public interface ResType {
         String GRADIENT = "GRADIENT";
         String SHAPE = "SHAPE";
         String STROKE = "STROKE";
+        String SELECTOR = "SELECTOR";
     }
 
     public static CodeTemplate createCodeTemplate(String fileType, AnActionEvent e) {
@@ -69,6 +67,9 @@ public class TemplateFactory {
 
         ResTemplate resTemplate = null;
         switch (resType) {
+            case ResType.SELECTOR:
+                resTemplate = new SelectorTemplate();
+                break;
             case ResType.STROKE:
                 resTemplate = new StrokeTemplate();
                 break;

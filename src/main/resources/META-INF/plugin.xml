@@ -54,6 +54,10 @@
                     class="com.ouyang.codetemplategenerator.template.restemplate.StrokeTemplateGenerator"
                     text="StrokeTemplateGenerator" description="Stroke模版生成器">
             </action>
+            <action id="SelectorTemplateGenerator" icon="SdkIcons.Sdk_default_icon"
+                    class="com.ouyang.codetemplategenerator.template.restemplate.SelectorTemplateGenerator"
+                    text="SelectorTemplateGenerator" description="Selector模版生成器">
+            </action>
         </group>
 
 

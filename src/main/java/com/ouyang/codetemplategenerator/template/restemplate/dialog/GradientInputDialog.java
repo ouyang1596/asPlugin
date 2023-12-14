@@ -9,9 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * 用户交互弹框
- */
+
 public class GradientInputDialog extends DialogWrapper {
 
     private JTextField startColoField;
@@ -21,7 +19,7 @@ public class GradientInputDialog extends DialogWrapper {
 
     public GradientInputDialog(Project project) {
         super(project, true);
-        setTitle("Generate Code");
+        setTitle("Generate Gradient");
 
         init();
     }
@@ -31,13 +29,13 @@ public class GradientInputDialog extends DialogWrapper {
         JPanel panel = new JPanel(new BorderLayout());
 
         JPanel startColorPanel = new JPanel(new BorderLayout());
-        JLabel startColoLabel = new JLabel("Start Color:");
+        JLabel startColoLabel = new JLabel("startColo:");
         startColoField = new JTextField();
         startColorPanel.add(startColoLabel, BorderLayout.WEST);
         startColorPanel.add(startColoField, BorderLayout.CENTER);
 
         JPanel endColorPanel = new JPanel(new BorderLayout());
-        JLabel endColorLabel = new JLabel("End Color:");
+        JLabel endColorLabel = new JLabel("endColor:");
         endColorField = new JTextField();
         endColorPanel.add(endColorLabel, BorderLayout.WEST);
         endColorPanel.add(endColorField, BorderLayout.CENTER);
@@ -47,14 +45,14 @@ public class GradientInputDialog extends DialogWrapper {
         positionPanel.add(endColorPanel, BorderLayout.EAST);
 
         JPanel anglePanel = new JPanel(new BorderLayout());
-        JLabel angleLabel = new JLabel("Angle:");
+        JLabel angleLabel = new JLabel("angle:");
         angleField = new JTextField();
         anglePanel.add(angleLabel, BorderLayout.WEST);
         anglePanel.add(angleField, BorderLayout.CENTER);
 
 
         JPanel radiusPanel = new JPanel(new BorderLayout());
-        JLabel radiusLabel = new JLabel("Radius:");
+        JLabel radiusLabel = new JLabel("radius:");
         radiusField = new JTextField();
         radiusPanel.add(radiusLabel, BorderLayout.WEST);
         radiusPanel.add(radiusField, BorderLayout.CENTER);

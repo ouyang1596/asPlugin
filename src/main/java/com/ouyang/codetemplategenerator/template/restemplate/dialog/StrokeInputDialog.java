@@ -21,7 +21,7 @@ public class StrokeInputDialog extends DialogWrapper {
 
     public StrokeInputDialog(Project project) {
         super(project, true);
-        setTitle("Generate Code");
+        setTitle("Generate Stroke");
 
         init();
     }

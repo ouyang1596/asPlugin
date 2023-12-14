@@ -8,7 +8,7 @@ import com.ouyang.codetemplategenerator.template.TemplateFactory;
 import com.ouyang.codetemplategenerator.template.restemplate.dialog.ShapeInputDialog;
 
 /**
- * 代码模版生成器
+ * Shape模板生成器
  */
 public class ShapeTemplateGenerator extends AnAction {
 
@@ -20,11 +20,16 @@ public class ShapeTemplateGenerator extends AnAction {
             return;
         }
 
+        handleDialog(e, project);
+
+    }
+
+    public static ResTemplate handleDialog(AnActionEvent e, Project project) {
         // 创建并显示用户界面
         ShapeInputDialog dialog = new ShapeInputDialog(project);
         dialog.show();
         if (dialog.getExitCode() != DialogWrapper.OK_EXIT_CODE) {
-            return;
+            return null;
         }
 
         String color = dialog.getColor();
@@ -36,8 +41,7 @@ public class ShapeTemplateGenerator extends AnAction {
             codeTemplate.setRadius(radius);
             codeTemplate.generateTemplate();
         }
-
-
+        return codeTemplate;
     }
 
 }

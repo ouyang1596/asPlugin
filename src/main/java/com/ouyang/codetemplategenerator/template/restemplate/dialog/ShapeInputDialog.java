@@ -9,9 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * 用户交互弹框
- */
+
 public class ShapeInputDialog extends DialogWrapper {
 
     private JTextField coloField;
@@ -19,7 +17,7 @@ public class ShapeInputDialog extends DialogWrapper {
 
     public ShapeInputDialog(Project project) {
         super(project, true);
-        setTitle("Generate Code");
+        setTitle("Generate Shape");
 
         init();
     }

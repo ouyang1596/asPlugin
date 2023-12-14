@@ -8,7 +8,7 @@ import com.ouyang.codetemplategenerator.template.TemplateFactory;
 import com.ouyang.codetemplategenerator.template.restemplate.dialog.GradientInputDialog;
 
 /**
- * 代码模版生成器
+ * Gradient模板生成器
  */
 public class GradientTemplateGenerator extends AnAction {
 
@@ -20,11 +20,17 @@ public class GradientTemplateGenerator extends AnAction {
             return;
         }
 
+        handleDialog(e, project);
+
+
+    }
+
+    public static ResTemplate handleDialog(AnActionEvent e, Project project) {
         // 创建并显示用户界面
         GradientInputDialog dialog = new GradientInputDialog(project);
         dialog.show();
         if (dialog.getExitCode() != DialogWrapper.OK_EXIT_CODE) {
-            return;
+            return null;
         }
 
         String startColor = dialog.getStartColor();
@@ -40,8 +46,7 @@ public class GradientTemplateGenerator extends AnAction {
             codeTemplate.setRadius(radius);
             codeTemplate.generateTemplate();
         }
-
-
+        return codeTemplate;
     }
 
 }

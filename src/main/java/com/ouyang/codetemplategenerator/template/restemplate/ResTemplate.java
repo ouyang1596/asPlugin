@@ -71,6 +71,10 @@ public abstract class ResTemplate extends Template {
         otherAction();
     }
 
+    public String getResName() {
+        return resName;
+    }
+
     public void setStrokeColor(String strokeColor) {
         this.strokeColor = strokeColor;
     }

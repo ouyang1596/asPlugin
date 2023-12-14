@@ -8,7 +8,7 @@ import com.ouyang.codetemplategenerator.template.TemplateFactory;
 import com.ouyang.codetemplategenerator.template.restemplate.dialog.StrokeInputDialog;
 
 /**
- * 代码模版生成器
+ * Stroke模板生成器
  */
 public class StrokeTemplateGenerator extends AnAction {
 
@@ -20,11 +20,16 @@ public class StrokeTemplateGenerator extends AnAction {
             return;
         }
 
+        handleDialog(e, project);
+
+    }
+
+    public static ResTemplate handleDialog(AnActionEvent e, Project project) {
         // 创建并显示用户界面
         StrokeInputDialog dialog = new StrokeInputDialog(project);
         dialog.show();
         if (dialog.getExitCode() != DialogWrapper.OK_EXIT_CODE) {
-            return;
+            return null;
         }
 
         String strokeColor = dialog.getStrokeColor();
@@ -40,7 +45,7 @@ public class StrokeTemplateGenerator extends AnAction {
             codeTemplate.setRadius(radius);
             codeTemplate.generateTemplate();
         }
-
+        return codeTemplate;
     }
 
 }
