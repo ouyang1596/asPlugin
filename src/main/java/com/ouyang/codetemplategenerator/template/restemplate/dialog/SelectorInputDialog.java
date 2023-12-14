@@ -25,15 +25,19 @@ public class SelectorInputDialog extends DialogWrapper implements ActionListener
     private JTextField resNameField;
     private JTextField normalResField;
     private JTextField pressResField;
-
-    /**
-     * state_selected
-     */
-    private JBRadioButton rbSelected;
     /**
      * state_pressed
      */
     private JBRadioButton rbPressed;
+    /**
+     * state_enabled
+     */
+    private JBRadioButton rbEnabled;
+    /**
+     * state_selected
+     */
+    private JBRadioButton rbSelected;
+
     /**
      * 色值类型
      */
@@ -86,7 +90,7 @@ public class SelectorInputDialog extends DialogWrapper implements ActionListener
 
         JLabel normalResLabel = new JLabel("normalRes:");
         normalResField = new JTextField();
-        JLabel pressResLabel = new JLabel("pressRes:");
+        JLabel pressResLabel = new JLabel("stateChangeRes:");
         pressResField = new JTextField();
         JPanel stateResPanel = new JPanel(new HorizontalLayout());
         stateResPanel.add(normalResLabel);
@@ -99,15 +103,21 @@ public class SelectorInputDialog extends DialogWrapper implements ActionListener
         rbPressed = new JBRadioButton();
         rbPressed.addActionListener(this);
         rbPressed.setSelected(true);
+        JLabel enabledLabel = new JLabel("enabled:");
+        rbEnabled = new JBRadioButton();
+        rbEnabled.addActionListener(this);
         JLabel selectedLabel = new JLabel("selected:");
         rbSelected = new JBRadioButton();
         rbSelected.addActionListener(this);
         ButtonGroup stateGroup = new ButtonGroup();
         stateGroup.add(rbPressed);
+        stateGroup.add(rbEnabled);
         stateGroup.add(rbSelected);
         JPanel statePanel = new JPanel(new HorizontalLayout());
         statePanel.add(pressedLabel);
         statePanel.add(rbPressed);
+        statePanel.add(enabledLabel);
+        statePanel.add(rbEnabled);
         statePanel.add(selectedLabel);
         statePanel.add(rbSelected);
 
@@ -206,6 +216,8 @@ public class SelectorInputDialog extends DialogWrapper implements ActionListener
     public int getSelectorState() {
         if (rbPressed.isSelected()) {
             return SelectorTemplate.SelectorState.PRESSED;
+        } else if (rbEnabled.isSelected()) {
+            return SelectorTemplate.SelectorState.ENABLE;
         } else {
             return SelectorTemplate.SelectorState.SELECTED;
         }

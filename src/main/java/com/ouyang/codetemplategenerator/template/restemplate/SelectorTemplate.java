@@ -20,6 +20,7 @@ public class SelectorTemplate extends ResTemplate {
     public interface SelectorState {
         int PRESSED = 1;
         int SELECTED = 2;
+        int ENABLE = 3;
     }
 
     /**
@@ -90,27 +91,37 @@ public class SelectorTemplate extends ResTemplate {
     @Override
     public void generateResFile() {
         try {
+            String enable = "";
             String state = "";
             if (SelectorState.SELECTED == selectorState) {
                 state = "state_selected";
+            } else if (SelectorState.ENABLE == selectorState) {
+                enable = "android:state_enabled=\"false\" ";
+                state = "state_enabled";
             } else {
                 state = "state_pressed";
             }
             String xmlCode = null;
             if (resFlag == ResFlag.DRAWABLE) {
+//                xmlCode = "<selector xmlns:android=\"http://schemas.android.com/apk/res/android\">\n" +
+//                        "<item android:" + state + "=\"true\" android:drawable=\"@drawable/" + pressRes + "\" />\n" +
+//                        "<item android:drawable=\"@drawable/" + normalRes + "\" " + enable + "/>\n" +
+//                        "</selector>";
                 xmlCode = "<selector xmlns:android=\"http://schemas.android.com/apk/res/android\">\n" +
-                        "<item android:" + state + "=\"true\" android:drawable=\"@drawable/" + pressRes + "\" />\n" +
-                        "<item android:state_focused=\"true\" android:drawable=\"@drawable/" + pressRes + "\" />\n" +
-                        "<item android:drawable=\"@drawable/" + normalRes + "\" />\n" +
+                        "    <item android:drawable=\"" + pressRes + "\" android:" + state + "=\"true\" />\n" +
+                        "    <item android:drawable=\"" + normalRes + "\" " + enable + "/>\n" +
                         "</selector>";
             } else if (resFlag == ResFlag.COLOR) {
                 String normalResName = handleColorName(normalRes, getColorFilePath());
                 String pressResName = handleColorName(pressRes, getColorFilePath());
-                xmlCode = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-                        "<selector xmlns:android=\"http://schemas.android.com/apk/res/android\">\n" +
+//                xmlCode = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+//                        "<selector xmlns:android=\"http://schemas.android.com/apk/res/android\">\n" +
+//                        "    <item android:color=\"" + pressResName + "\" android:" + state + "=\"true\" />\n" +
+//                        "    <item android:color=\"" + normalResName + "\" " + enable + "/>\n" +
+//                        "</selector>";
+                xmlCode = "<selector xmlns:android=\"http://schemas.android.com/apk/res/android\">\n" +
                         "    <item android:color=\"" + pressResName + "\" android:" + state + "=\"true\" />\n" +
-                        "    <item android:color=\"" + pressResName + "\" android:state_focused=\"true\" />\n" +
-                        "    <item android:color=\"" + normalResName + "\" />\n" +
+                        "    <item android:color=\"" + normalResName + "\" " + enable + "/>\n" +
                         "</selector>";
             }
 
