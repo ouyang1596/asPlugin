@@ -39,6 +39,11 @@ public class SelectorInputDialog extends DialogWrapper implements ActionListener
     private JBRadioButton rbSelected;
 
     /**
+     * state_checked
+     */
+    private JBRadioButton rbChecked;
+
+    /**
      * 色值类型
      */
     private JBRadioButton rbColor;
@@ -109,10 +114,14 @@ public class SelectorInputDialog extends DialogWrapper implements ActionListener
         JLabel selectedLabel = new JLabel("selected  ");
         rbSelected = new JBRadioButton();
         rbSelected.addActionListener(this);
+        JLabel checkedLabel = new JLabel("checked  ");
+        rbChecked = new JBRadioButton();
+        rbChecked.addActionListener(this);
         ButtonGroup stateGroup = new ButtonGroup();
         stateGroup.add(rbPressed);
         stateGroup.add(rbEnabled);
         stateGroup.add(rbSelected);
+        stateGroup.add(rbChecked);
         JPanel statePanel = new JPanel(new HorizontalLayout());
         statePanel.add(rbPressed);
         statePanel.add(pressedLabel);
@@ -120,6 +129,8 @@ public class SelectorInputDialog extends DialogWrapper implements ActionListener
         statePanel.add(enabledLabel);
         statePanel.add(rbSelected);
         statePanel.add(selectedLabel);
+        statePanel.add(rbChecked);
+        statePanel.add(checkedLabel);
 
 
         resTypePanel = new JPanel(new HorizontalLayout());
@@ -214,12 +225,14 @@ public class SelectorInputDialog extends DialogWrapper implements ActionListener
     }
 
     public int getSelectorState() {
-        if (rbPressed.isSelected()) {
-            return SelectorTemplate.SelectorState.PRESSED;
+        if (rbSelected.isSelected()) {
+            return SelectorTemplate.SelectorState.SELECTED;
         } else if (rbEnabled.isSelected()) {
             return SelectorTemplate.SelectorState.ENABLE;
+        } else if (rbChecked.isSelected()) {
+            return SelectorTemplate.SelectorState.CHECKED;
         } else {
-            return SelectorTemplate.SelectorState.SELECTED;
+            return SelectorTemplate.SelectorState.PRESSED;
         }
     }
 

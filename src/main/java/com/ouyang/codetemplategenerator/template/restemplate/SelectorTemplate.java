@@ -21,6 +21,8 @@ public class SelectorTemplate extends ResTemplate {
         int PRESSED = 1;
         int SELECTED = 2;
         int ENABLE = 3;
+
+        int CHECKED = 4;
     }
 
     /**
@@ -70,12 +72,19 @@ public class SelectorTemplate extends ResTemplate {
     @Override
     public void setResFileName() {
         String state = "";
-        if (SelectorState.SELECTED == selectorState) {
-            state = "se";
-        } else if (SelectorState.ENABLE == selectorState) {
-            state = "en";
-        } else {
-            state = "pr";
+        switch (selectorState) {
+            case SelectorState.SELECTED:
+                state = "se";
+                break;
+            case SelectorState.ENABLE:
+                state = "en";
+                break;
+            case SelectorState.CHECKED:
+                state = "ch";
+                break;
+            default:
+                state = "pr";
+                break;
         }
         if (resFlag == ResFlag.DRAWABLE) {
             resName = "selector_no_d_" + normalRes + "_" + state + "_d_" + pressRes;
@@ -101,14 +110,21 @@ public class SelectorTemplate extends ResTemplate {
         try {
             String enable = "";
             String state = "";
-            if (SelectorState.SELECTED == selectorState) {
-                state = "state_selected";
-            } else if (SelectorState.ENABLE == selectorState) {
-                enable = "android:state_enabled=\"false\" ";
-                state = "state_enabled";
-            } else {
-                state = "state_pressed";
+            switch (selectorState) {
+                case SelectorState.SELECTED:
+                    state = "state_selected";
+                    break;
+                case SelectorState.ENABLE:
+                    state = "state_enabled";
+                    break;
+                case SelectorState.CHECKED:
+                    state = "state_checked";
+                    break;
+                default:
+                    state = "state_pressed";
+                    break;
             }
+
             String xmlCode = null;
             if (resFlag == ResFlag.DRAWABLE) {
 //                xmlCode = "<selector xmlns:android=\"http://schemas.android.com/apk/res/android\">\n" +
