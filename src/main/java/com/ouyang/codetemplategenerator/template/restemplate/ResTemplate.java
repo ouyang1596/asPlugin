@@ -158,16 +158,15 @@ public abstract class ResTemplate extends Template {
         String colorName = getInnerColorName(colorValue, colorsFilePath);
         if (colorName != null) return colorName;
 
-        //由于不同模块之间的xml资源不能引用，所以注释掉此段代码
-//        if (TextUtils.isEmpty(colorName)) {
-//            String substring = colorsFilePath.substring(0, colorsFilePath.indexOf("/src/main"));
-//            String end = colorsFilePath.substring(colorsFilePath.indexOf("/src/main"));
-//            String start = substring.substring(0, substring.lastIndexOf("/") + 1);
-//            if (!"commonlibrary".equals(substring)) {
-//                colorsFilePath = start + "commonlibrary" + end;
-//                colorName = getInnerColorName(colorValue, colorsFilePath);
-//            }
-//        }
+        if (TextUtils.isEmpty(colorName)) {
+            String substring = colorsFilePath.substring(0, colorsFilePath.indexOf("/src/main"));
+            String end = colorsFilePath.substring(colorsFilePath.indexOf("/src/main"));
+            String start = substring.substring(0, substring.lastIndexOf("/") + 1);
+            if (!"commonlibrary".equals(substring)) {
+                colorsFilePath = start + "commonlibrary" + end;
+                colorName = getInnerColorName(colorValue, colorsFilePath);
+            }
+        }
         if (TextUtils.isEmpty(colorName)) {
             // 读取原始文件
             try {
