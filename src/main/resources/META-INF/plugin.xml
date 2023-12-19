@@ -75,6 +75,10 @@
                     class="com.ouyang.codetemplategenerator.template.restemplate.generator.SelectorTemplateGenerator"
                     text="SelectorTemplateGenerator" description="Selector模版生成器">
             </action>
+            <action id="ParseXmlRes" icon="SdkIcons.Sdk_default_icon"
+                    class="com.ouyang.codetemplategenerator.template.restemplate.generator.ReplaceTextColor"
+                    text="ParseXmlRes" description="布局文件解析">
+            </action>
         </group>
 
 
