@@ -22,14 +22,21 @@ public class CodeInputDialog extends DialogWrapper {
         String CUSTOM_VIEW = "custom_view";
         String CUSTOM_BINDER = "custom_binder";
 
+
         String CUSTOM_DIALOG = "custom_dialog";
 
         String CUSTOM_LIST_ACTIVITY = "custom_list_activity";
+
+        String CUSTOM_VIEWPAGER_ACTIVITY = "custom_viewpager_activity";
 
 
         String CUSTOM_VIEW_WITH_RV = "custom_view_with_rv";
 
         String MVP = "mvp";
+
+        String CUSTOM_TAB_ADAPTER = "custom_tab_adapter";
+
+        String CUSTOM_FRAGMENT = "custom_fragment";
     }
 
     private JTextField classNameField;
@@ -68,7 +75,7 @@ public class CodeInputDialog extends DialogWrapper {
 
         JPanel fileTypePanel = new JPanel(new BorderLayout());
         JLabel fileTypeLabel = new JLabel("File Type:");
-        fileTypeComboBox = new JComboBox<>(new String[]{FileType.CUSTOM_VIEW, FileType.CUSTOM_VIEW_WITH_RV, FileType.CUSTOM_BINDER, FileType.CUSTOM_DIALOG, FileType.CUSTOM_LIST_ACTIVITY});
+        fileTypeComboBox = new JComboBox<>(new String[]{FileType.CUSTOM_VIEW, FileType.CUSTOM_VIEW_WITH_RV, FileType.CUSTOM_BINDER, FileType.CUSTOM_DIALOG, FileType.CUSTOM_LIST_ACTIVITY, FileType.CUSTOM_VIEWPAGER_ACTIVITY});
         fileTypePanel.add(fileTypeLabel, BorderLayout.WEST);
         fileTypePanel.add(fileTypeComboBox, BorderLayout.CENTER);
 

@@ -45,6 +45,15 @@ public class TemplateFactory {
             case CodeInputDialog.FileType.CUSTOM_VIEW_WITH_RV:
                 codeTemplate = new ViewWithRvCodeTemplate();
                 break;
+            case CodeInputDialog.FileType.CUSTOM_VIEWPAGER_ACTIVITY:
+                codeTemplate = new ViewPagerActivityCodeTemplate();
+                break;
+            case CodeInputDialog.FileType.CUSTOM_TAB_ADAPTER:
+                codeTemplate = new TabAdapterCodeTemplate();
+                break;
+            case CodeInputDialog.FileType.CUSTOM_FRAGMENT:
+                codeTemplate = new FragmentCodeTemplate();
+                break;
             default:
                 codeTemplate = new ViewCodeTemplate();
                 break;
