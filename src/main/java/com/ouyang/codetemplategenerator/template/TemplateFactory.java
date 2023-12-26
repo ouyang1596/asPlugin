@@ -42,6 +42,9 @@ public class TemplateFactory {
             case CodeInputDialog.FileType.CUSTOM_LIST_ACTIVITY:
                 codeTemplate = new ListActivityCodeTemplate();
                 break;
+            case CodeInputDialog.FileType.CUSTOM_VIEW_WITH_RV:
+                codeTemplate = new ViewWithRvCodeTemplate();
+                break;
             default:
                 codeTemplate = new ViewCodeTemplate();
                 break;

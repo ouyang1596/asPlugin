@@ -26,6 +26,9 @@ public class CodeInputDialog extends DialogWrapper {
 
         String CUSTOM_LIST_ACTIVITY = "custom_list_activity";
 
+
+        String CUSTOM_VIEW_WITH_RV = "custom_view_with_rv";
+
         String MVP = "mvp";
     }
 
@@ -65,7 +68,7 @@ public class CodeInputDialog extends DialogWrapper {
 
         JPanel fileTypePanel = new JPanel(new BorderLayout());
         JLabel fileTypeLabel = new JLabel("File Type:");
-        fileTypeComboBox = new JComboBox<>(new String[]{FileType.CUSTOM_VIEW, FileType.CUSTOM_BINDER, FileType.CUSTOM_DIALOG, FileType.CUSTOM_LIST_ACTIVITY});
+        fileTypeComboBox = new JComboBox<>(new String[]{FileType.CUSTOM_VIEW, FileType.CUSTOM_VIEW_WITH_RV, FileType.CUSTOM_BINDER, FileType.CUSTOM_DIALOG, FileType.CUSTOM_LIST_ACTIVITY});
         fileTypePanel.add(fileTypeLabel, BorderLayout.WEST);
         fileTypePanel.add(fileTypeComboBox, BorderLayout.CENTER);
 
